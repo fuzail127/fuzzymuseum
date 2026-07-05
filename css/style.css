@@ -512,7 +512,7 @@ h1, h2, h3 { line-height: 1.2; margin: 0 0 0.5em; }
 
 /* ============ Detail pages ============ */
 .detail {
-  max-width: 780px;
+  max-width: 960px;
   margin: 0 auto;
   padding: 3.5rem 1.25rem 5rem;
 }
@@ -555,11 +555,11 @@ h1, h2, h3 { line-height: 1.2; margin: 0 0 0.5em; }
 
 .detail-media {
   float: right;
-  width: min(300px, 42%);
+  width: min(360px, 42%);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.6rem;
-  margin: 0.5rem 0 1.25rem 1.5rem;
+  gap: 1rem;
+  margin: 0.5rem 0 1.25rem 1.75rem;
 }
 .detail-media img {
   width: 100%;

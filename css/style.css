@@ -349,6 +349,21 @@ h1, h2, h3 { line-height: 1.2; margin: 0 0 0.5em; }
   object-fit: cover;
 }
 
+/* collage variants: one big photo + stacked thumbs, or an even split */
+.card-media.card-collage {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+  background: var(--border);
+}
+.card-media.card-collage img:first-child { grid-row: 1 / 3; }
+.card-media.card-collage.card-collage-2 {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+}
+.card-media.card-collage.card-collage-2 img:first-child { grid-row: auto; }
+
 .card-media-placeholder {
   display: flex;
   align-items: center;
@@ -541,12 +556,22 @@ h1, h2, h3 { line-height: 1.2; margin: 0 0 0.5em; }
 .detail-media {
   float: right;
   width: min(300px, 42%);
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
   margin: 0.5rem 0 1.25rem 1.5rem;
 }
-.detail-media img { width: 100%; }
+.detail-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  grid-column: 1 / -1;
+}
+/* a middle pair of photos sits side by side to save height */
+.detail-media img:nth-child(2):not(:last-child) { grid-column: 1; }
+.detail-media img:nth-child(3) { grid-column: 2; }
 
 /* keep floated media from spilling past the page content */
 .detail::after {

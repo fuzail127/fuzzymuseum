@@ -539,12 +539,29 @@ h1, h2, h3 { line-height: 1.2; margin: 0 0 0.5em; }
 .detail strong { color: var(--text); }
 
 .detail-media {
+  float: right;
+  width: min(300px, 42%);
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid var(--border);
-  margin: 1.5rem 0;
+  margin: 0.5rem 0 1.25rem 1.5rem;
 }
 .detail-media img { width: 100%; }
+
+/* keep floated media from spilling past the page content */
+.detail::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+@media (max-width: 700px) {
+  .detail-media {
+    float: none;
+    width: 100%;
+    margin: 1.5rem 0;
+  }
+}
 
 .detail-note {
   background: var(--accent-soft);

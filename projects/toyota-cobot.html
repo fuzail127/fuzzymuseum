@@ -48,30 +48,73 @@
     <p class="detail-sub">A collaborative-robotics workshop designed with Toyota: a vision-guided pick-and-place cell that stops the moment a human hand enters the workspace.</p>
     <ul class="tags">
       <li>OpenCV</li>
+      <li>YOLO</li>
       <li>Dobot Arm</li>
+      <li>Orbbec Depth Camera</li>
       <li>Python</li>
       <li>Cobots</li>
       <li>HRI Safety</li>
       <li>Computer Vision</li>
     </ul>
 
+    <div class="detail-media">
+      <img src="../assets/img/toyota-cobot-1.jpg" alt="Dobot Magician arm with a gripper above a bench, a red 3D-printed brake caliper sitting in a round tray">
+    </div>
+
     <h2>Goal</h2>
     <p>
       Design a workshop that teaches <strong>human–robot collaboration</strong> hands-on, in partnership with
       <strong>Toyota</strong> — letting students see both the automation and the safety engineering that make
-      collaborative cells work in industry.
+      collaborative cells work in industry. This was one of two sub-problems I built for the
+      <strong>Toyota Innovation Challenge (Summer 2026)</strong>; the other was
+      <a href="fleet-robotics.html">autonomous fleets</a>.
     </p>
+    <p>
+      The design half matters, but <strong>testing</strong> was the real job. A workshop challenge is only good if you
+      already know where it breaks — so we solved it ourselves first, several different ways, specifically to find the
+      places students would get stuck.
+    </p>
+
+    <h2>The setup</h2>
+    <ul>
+      <li>A <strong>Dobot Magician</strong> arm with a gripper, working a tabletop cell.</li>
+      <li>An <strong>Orbbec camera</strong> on an adjustable stand watching the same workspace.</li>
+      <li>A Python control library written by <strong>Dr. Mike</strong> that drives the arm — the layer that makes it practical to have students program a real industrial-style cell in a few days.</li>
+    </ul>
 
     <h2>How it works</h2>
     <ul>
-      <li>An <strong>OpenCV</strong> pipeline segments the workspace by colour, identifies target objects, and computes pick coordinates.</li>
+      <li>An <strong>OpenCV</strong> pipeline segments the workspace by colour, identifies target objects, and computes pick coordinates. The baseline we hand students detects red objects, picks them up, and drops them into a round container.</li>
       <li>A <strong>Dobot robotic arm</strong> picks each matching object and places it into a tray, fully autonomously.</li>
-      <li>A safety layer continuously watches the work zone: if a <strong>human hand is detected inside it, the arm pauses immediately</strong> and resumes only when the zone is clear — the same interlock philosophy used in industrial cobot cells.</li>
+      <li>A safety layer continuously watches the work zone: if a <strong>human hand is detected inside it, the arm pauses immediately</strong> and resumes only once the hand is clear of the zone — the same interlock philosophy used in industrial cobot cells.</li>
     </ul>
 
+    <h2>Solving our own challenge</h2>
+    <p>
+      Once the baseline worked, the fun part started — building out our own solutions so we'd actually understand the
+      problem space well enough to help students through it:
+    </p>
+    <ul>
+      <li><strong>Retargeting by colour</strong> — changing which colour the arm hunts for, which sounds trivial until lighting shifts and your "red" threshold quietly stops matching red.</li>
+      <li><strong>Multiple objects</strong> — deciding what to pick first and how to keep the vision pipeline stable while the scene changes under it.</li>
+      <li><strong>Multiple drop-off points</strong> — sorting rather than just clearing, so the arm has to route each object somewhere specific.</li>
+      <li><strong>Hand detection with YOLO</strong> — I added a <strong>YOLO</strong> model on top of the colour pipeline so the safety interlock keys on an actual detected hand rather than a colour blob. If a hand enters the working envelope during a task, the arm stops dead and stays stopped until the zone is clear.</li>
+      <li><strong>Irregular parts</strong> — moving from flat velcro markers to 3D-printed car parts like brake calipers, where the shape gives you no clean centroid to grab.</li>
+    </ul>
+
+    <h2>What didn't work</h2>
+    <p>
+      One idea I couldn't land: a <strong>helmet-mounted camera</strong>, so the arm would only move while the human was
+      actually looking at it — gaze as the safety signal instead of proximity. Combining that with the hand detection
+      turned into a mess of conflicting triggers, and I ran out of time to untangle it. It's still the version of this
+      I'd most like to get working.
+    </p>
+
     <h2>Status</h2>
-    <p>Delivered as part of the Toyota Challenge at the IDEAS Clinic.
-    See also: <a href="../experience/ideas-clinic-2026.html">my current IDEAS Clinic term</a>.</p>
+    <p>Delivered as part of the Toyota Innovation Challenge at the IDEAS Clinic.
+    <a href="https://github.com/IdeasClinicUWaterloo/S26-Toyota-Innovation-Challenge/blob/main/Collaborative_Robotics/README.md" target="_blank" rel="noopener">Challenge repo →</a><br>
+    See also: <a href="fleet-robotics.html">the autonomous-fleets challenge</a> and
+    <a href="../experience/ideas-clinic-2026.html">my current IDEAS Clinic term</a>.</p>
 
   </main>
 

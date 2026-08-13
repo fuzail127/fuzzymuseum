@@ -48,40 +48,60 @@
     <p class="detail-sub">Second term at the IDEAS Clinic — this time centred on collaborative robotics, campus sensor-data infrastructure, and applied AI robotics.</p>
     <ul class="tags">
       <li>OpenCV</li>
+      <li>YOLO</li>
       <li>Python</li>
       <li>Dobot</li>
       <li>Collaborative Robotics</li>
+      <li>Multi-Robot Systems</li>
       <li>REST APIs</li>
       <li>Automation</li>
       <li>LLMs</li>
     </ul>
 
-    <h2>Toyota Collaborative Robotics Challenge</h2>
+    <h2>Toyota Innovation Challenge</h2>
     <p>
-      I designed a hands-on workshop on human–robot collaboration in partnership with <strong>Toyota</strong>,
-      built around a <strong>Dobot robotic arm</strong> and an <strong>OpenCV</strong> vision pipeline with a
-      human-hand safety interlock. <a href="../projects/toyota-cobot.html">Full write-up →</a>
+      I designed and tested two of the sub-problems for the <strong>Toyota Innovation Challenge (Summer 2026)</strong>.
+      Designing them is only half of it — the testing is the part that matters, because a challenge is only good if
+      you've already found where it breaks.
     </p>
+    <ul>
+      <li>
+        <strong>Collaborative robotics</strong> — a <strong>Dobot Magician</strong> arm and an <strong>Orbbec</strong>
+        camera running an <strong>OpenCV</strong> pick-and-place pipeline, with a <strong>YOLO</strong> hand detector
+        driving the safety interlock. I also built out multi-object and multi-drop-off variants to map the failure
+        modes students would hit. <a href="../projects/toyota-cobot.html">Full write-up →</a>
+      </li>
+      <li>
+        <strong>Autonomous fleets</strong> — multiple TETRIX robots completing a task together, coordinated by a
+        central arbiter over <strong>TCP</strong> with newline-delimited JSON and a live telemetry dashboard.
+        <a href="../projects/fleet-robotics.html">Full write-up →</a>
+      </li>
+    </ul>
 
     <h2>UW DataHub — backend</h2>
     <p>
-      I'm building the backend for <a href="https://datahub.uwaterloo.ca" target="_blank" rel="noopener">datahub.uwaterloo.ca</a>,
-      the university's sensor-data platform. The interesting problem is that campus sensors don't share one interface:
+      Another co-op and I rebuilt <a href="https://datahub.uwaterloo.ca" target="_blank" rel="noopener">datahub.uwaterloo.ca</a>,
+      a PhD researcher's campus environmental-sensor platform — I took the backend. The interesting problem is that
+      campus sensors don't share one interface, so a lot of the work was <strong>writing an API for sensors that
+      don't have one</strong>:
     </p>
     <ul>
       <li>Some sources expose <strong>REST APIs</strong> I can poll and ingest directly.</li>
-      <li>Others only send data out by <strong>email</strong> — so I'm building automation that parses those emails and folds them into the same pipeline, removing the manual step entirely.</li>
+      <li>Some hide their data behind a portal, where <strong>URL manipulation</strong> or replaying the front end's own requests turns the export endpoint into a usable API.</li>
+      <li>Others only send data out by <strong>email</strong> — so I built automation that parses those emails and folds them into the same pipeline, removing the manual step entirely.</li>
     </ul>
+    <p><a href="../projects/datahub.html">Full write-up →</a></p>
 
     <h2>GrowBot</h2>
     <p>
-      We're recreating the small robot from the YouTube video <em>"I gave ChatGPT a body"</em> — working directly
-      with the video's creator to understand the models behind it and build our own custom versions of the robot.
+      We started designing a workshop around the small LLM-driven robot from the YouTube video
+      <em>"I gave ChatGPT a body"</em>, working with the video's creator to understand the models behind it. Time
+      constraints meant it was scrapped before it shipped — I've kept building it as a personal project since.
       <a href="../projects/growbot.html">Full write-up →</a>
     </p>
 
     <h2>Status</h2>
-    <p>All three streams are active — this page will grow as the term progresses.</p>
+    <p>Term ongoing — this page will grow as it progresses.</p>
 
   </main>
 

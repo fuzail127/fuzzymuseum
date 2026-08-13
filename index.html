@@ -6,7 +6,7 @@
   <title>Syed Fuzail Farhan — Mechatronics Engineering</title>
   <meta name="description" content="Portfolio of Syed Fuzail Farhan, Mechatronics Engineering student at the University of Waterloo — firmware, mechatronic systems, and simulation-validated hardware.">
   <meta property="og:title" content="Syed Fuzail Farhan — Mechatronics Engineering">
-  <meta property="og:description" content="Firmware, mechatronic systems, and simulation-validated hardware. Projects: EMG-operated claw, two-axis motor control, desktop wind tunnel + CFD, post-op health monitoring research.">
+  <meta property="og:description" content="Firmware, mechatronic systems, and simulation-validated hardware. Projects: collaborative and fleet robotics for the Toyota Innovation Challenge, a campus sensor-data backend, an EMG-operated claw, and a desktop wind tunnel + CFD.">
   <meta property="og:type" content="website">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23141414'/%3E%3Ctext x='50' y='68' font-size='48' font-family='Arial, sans-serif' font-weight='bold' fill='white' text-anchor='middle'%3ESF%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -85,11 +85,11 @@
             microcontroller workshops to hundreds of engineering students.
           </p>
           <p>
-            Right now I'm building collaborative-robotics demos with a Dobot arm and
-            OpenCV, recreating an LLM-embodied robot with its original creator, and
-            writing rover firmware with the UW Robotics Team — alongside ongoing work
-            where hardware meets health: an EMG-driven prosthetic claw and early
-            research into post-operative patient monitoring.
+            Right now I'm designing collaborative- and fleet-robotics challenges with a
+            Dobot arm, OpenCV and a floor full of TETRIX robots, building the backend
+            for a campus environmental sensor platform, and writing rover firmware with
+            the UW Robotics Team — alongside an EMG-driven prosthetic claw and a
+            maze-solving robot I'm trying to turn into a fleet of its own.
           </p>
         </div>
         <div class="skills">
@@ -126,9 +126,9 @@
           <div class="timeline-body">
             <h3>Research Assistant · IDEAS Clinic, University of Waterloo</h3>
             <ul>
-              <li>Designed a collaborative-robotics workshop for the Toyota Challenge: a Dobot robotic arm + OpenCV pipeline that picks objects by colour and places them in trays — and pauses automatically whenever a human hand enters the work zone.</li>
-              <li>Building the sensor-data backend for <a href="https://datahub.uwaterloo.ca" target="_blank" rel="noopener">datahub.uwaterloo.ca</a>: ingesting sources through REST APIs and automating extraction from sensors that only report via email.</li>
-              <li>Recreating the "Growbot" — the LLM-embodied robot from <em>I gave ChatGPT a body</em> — in collaboration with its creator, to understand the underlying models and build a custom version.</li>
+              <li>Designed and stress-tested two sub-problems for the Toyota Innovation Challenge: a <a href="projects/toyota-cobot.html">collaborative-robotics cell</a> (Dobot arm + OpenCV + a YOLO hand-detection interlock) and an <a href="projects/fleet-robotics.html">autonomous-fleet challenge</a> coordinating multiple TETRIX robots over TCP.</li>
+              <li>Built the sensor-data backend for <a href="https://datahub.uwaterloo.ca" target="_blank" rel="noopener">datahub.uwaterloo.ca</a>: writing an API for sensors that don't have one — REST ingestion, URL manipulation, request-level scraping, and automated parsing of sensors that only report by email.</li>
+              <li>Prototyped the "GrowBot", an LLM-embodied robot, with the creator of <em>I gave ChatGPT a body</em> — now continued as a personal build.</li>
             </ul>
             <a class="read-more" href="experience/ideas-clinic-2026.html">Read more →</a>
           </div>
@@ -213,9 +213,8 @@
       <div class="projects-grid">
 
         <article class="card">
-          <!-- TODO: swap placeholder for a photo of the Dobot workshop setup -->
-          <div class="card-media card-media-placeholder" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4 20 9.5l-7 7L7.5 11z"/><path d="M7.5 11 4 14.5 9.5 20l3.5-3.5"/><circle cx="17" cy="7" r="2.5"/><path d="M4 20h5"/></svg>
+          <div class="card-media">
+            <img src="assets/img/toyota-cobot-1.jpg" alt="Dobot Magician arm with a gripper above a bench, a red 3D-printed brake caliper in a round tray" loading="lazy">
           </div>
           <div class="card-body">
             <div class="card-top">
@@ -223,16 +222,85 @@
               <span class="badge badge-done">Delivered</span>
             </div>
             <p>
-              A collaborative-robotics workshop designed with Toyota. A Dobot robotic
-              arm driven by an OpenCV vision pipeline detects objects by colour, picks
-              them up, and places them in trays — and a safety interlock pauses the arm
-              the instant a human hand is detected inside the work zone, demonstrating
-              safe human–robot collaboration.
+              A collaborative-robotics challenge designed with Toyota. A Dobot Magician
+              arm and an Orbbec camera run an OpenCV pipeline that finds objects by
+              colour, picks them up, and sorts them into trays — with a YOLO hand
+              detector layered on top so the arm stops dead the instant a human hand
+              enters the work zone, and stays stopped until it's clear.
             </p>
             <ul class="tags">
-              <li>OpenCV</li><li>Dobot Arm</li><li>Python</li><li>Cobots</li><li>HRI Safety</li>
+              <li>OpenCV</li><li>YOLO</li><li>Dobot Arm</li><li>Python</li><li>HRI Safety</li>
             </ul>
             <a class="read-more" href="projects/toyota-cobot.html">Read more →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-media">
+            <img src="assets/img/fleet-robotics-1.jpg" alt="ESP32 breadboard circuit acting as the wireless bridge between the operator station and a fleet robot" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <h3>Toyota Challenge — Autonomous Fleets</h3>
+              <span class="badge badge-done">Delivered</span>
+            </div>
+            <p>
+              The second Toyota challenge I built: a fleet of TETRIX robots completing a
+              task together. A central arbiter talks to each robot over TCP in
+              newline-delimited JSON, a dashboard shows every robot's pose, state and
+              sensors at once, and the challenge ladders from "make one robot reliable"
+              up to collision-free coordination across the whole fleet.
+            </p>
+            <ul class="tags">
+              <li>Multi-Robot Systems</li><li>TETRIX</li><li>ESP32</li><li>TCP / JSON</li><li>Telemetry</li>
+            </ul>
+            <a class="read-more" href="projects/fleet-robotics.html">Read more →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-media">
+            <img src="assets/img/datahub-1.jpg" alt="The DataHub landing page showing a campus map with colour-coded environmental sensor markers" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <h3>UW DataHub — Sensor Data Backend</h3>
+              <span class="badge badge-done">Live</span>
+            </div>
+            <p>
+              Another co-op and I rebuilt a PhD researcher's campus sensor platform — I
+              took the backend. The hard part was the sensors with no API: I built one
+              for them anyway, through URL manipulation, replaying a portal's own
+              requests, and automated parsing of sensors that will only ever email you
+              their data. Live at datahub.uwaterloo.ca.
+            </p>
+            <ul class="tags">
+              <li>Python</li><li>REST APIs</li><li>Web Scraping</li><li>Data Pipelines</li><li>Backend</li>
+            </ul>
+            <a class="read-more" href="projects/datahub.html">Read more →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-media card-collage card-collage-2">
+            <img src="assets/img/maze-robot-1.jpg" alt="Two maze robots on a bench, each with an ultrasonic sensor mounted at the front" loading="lazy">
+            <img src="assets/img/maze-robot-2.jpg" alt="ESP32 wired to a DRV8833 motor driver and four DC motors on a breadboard chassis" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <h3>Maze-Solving Robot</h3>
+              <span class="badge badge-wip">Work in progress</span>
+            </div>
+            <p>
+              A mini maze solver built from cheap parts — ESP32, DRV8833 drivers, plain
+              DC motors, ultrasonic sensors for the walls. Then the goal moved: instead
+              of one robot solving a maze, I'm working toward a fleet of them solving it
+              together, splitting the map and sharing what each has already explored.
+            </p>
+            <ul class="tags">
+              <li>ESP32</li><li>DRV8833</li><li>Embedded C</li><li>Ultrasonics</li><li>Fleet Robotics</li>
+            </ul>
+            <a class="read-more" href="projects/maze-robot.html">Read more →</a>
           </div>
         </article>
 
@@ -306,28 +374,6 @@
         </article>
 
         <article class="card">
-          <div class="card-media card-media-placeholder" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          </div>
-          <div class="card-body">
-            <div class="card-top">
-              <h3>Post-Op Health Monitor</h3>
-              <span class="badge badge-research">Research phase</span>
-            </div>
-            <p>
-              Early-stage research into continuous, sensor-based detection of post-operative
-              complications before visible symptoms appear. Exploring low-power electrochemical,
-              optical, and MEMS pressure sensing with BLE/NFC offload to a bedside hub and a
-              nurse-facing dashboard. Currently scoping the best initial complication target.
-            </p>
-            <ul class="tags">
-              <li>Biosensors</li><li>BLE / NFC</li><li>MedTech</li><li>Research</li>
-            </ul>
-            <a class="read-more" href="projects/post-op-monitor.html">Read more →</a>
-          </div>
-        </article>
-
-        <article class="card">
           <!-- TODO: swap placeholder for a Growbot build photo -->
           <div class="card-media card-media-placeholder" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="9" rx="2"/><circle cx="9.5" cy="14.5" r="1"/><circle cx="14.5" cy="14.5" r="1"/><path d="M12 10V7"/><path d="M12 7c0-2 1.5-3.5 3.5-3.5C15.5 5.5 14 7 12 7zm0 0c0-2-1.5-3.5-3.5-3.5C8.5 5.5 10 7 12 7z"/></svg>
@@ -338,13 +384,14 @@
               <span class="badge badge-wip">Work in progress</span>
             </div>
             <p>
-              Recreating the small robot from the YouTube video
-              <em>"I gave ChatGPT a body"</em>, working directly with its creator.
-              We're reverse-engineering the models that drive it — perception,
-              conversation, and motion — to build our own custom version of the robot.
+              An LLM-driven desk robot, inspired by the video
+              <em>"I gave ChatGPT a body"</em>. It started as an IDEAS Clinic workshop
+              concept that got scrapped for time — I kept building it as a personal
+              project instead. Next step: wire it to the WHOOP API so it becomes a
+              genuinely toxic personal trainer that judges my sleep score every morning.
             </p>
             <ul class="tags">
-              <li>LLMs</li><li>Robotics</li><li>Embedded</li><li>Prototyping</li>
+              <li>LLMs</li><li>Reinforcement Learning</li><li>MuJoCo</li><li>Robotics</li><li>Embedded</li>
             </ul>
             <a class="read-more" href="projects/growbot.html">Read more →</a>
           </div>

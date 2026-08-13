@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post-Op Health Monitor — Syed Fuzail Farhan</title>
-  <meta name="description" content="Early-stage research into continuous sensor-based detection of post-operative complications.">
+  <title>Maze-Solving Robot — Syed Fuzail Farhan</title>
+  <meta name="description" content="An ESP32 maze-solving robot built on DRV8833 motor drivers and ultrasonic sensing — now being scaled from one robot into a coordinated fleet.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23141414'/%3E%3Ctext x='50' y='68' font-size='48' font-family='Arial, sans-serif' font-weight='bold' fill='white' text-anchor='middle'%3ESF%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,39 +43,55 @@
 
   <main class="detail">
     <a class="back-link" href="../index.html#projects">&larr; Back to projects</a>
-    <p class="hero-kicker">Project · Research phase</p>
-    <h1>Post-Op Health Monitor</h1>
-    <p class="detail-sub">Exploring whether surgical complications can be detected from continuous biosensor data before visible symptoms appear.</p>
+    <p class="hero-kicker">Project · Personal · Work in progress</p>
+    <h1>Maze-Solving Robot</h1>
+    <p class="detail-sub">A small ESP32 robot built to solve a maze on its own. Then the goal moved: make several of them solve it together.</p>
     <ul class="tags">
-      <li>Biosensors</li>
-      <li>BLE / NFC</li>
-      <li>MedTech</li>
-      <li>Research</li>
+      <li>ESP32</li>
+      <li>DRV8833</li>
+      <li>Embedded C</li>
+      <li>Ultrasonic Sensing</li>
+      <li>Multi-Robot Systems</li>
     </ul>
 
-    <h2>Hypothesis</h2>
+    <div class="detail-media">
+      <img src="../assets/img/maze-robot-1.jpg" alt="Two maze robots on a bench, each with an HC-SR04 ultrasonic sensor mounted at the front">
+      <img src="../assets/img/maze-robot-2.jpg" alt="ESP32 dev board on a breadboard wired to a DRV8833 motor driver and four DC motors, powered by 9V batteries">
+    </div>
+
+    <h2>Where it started</h2>
     <p>
-      Inspired by companies like FluidAI: surgical complications have detectable biochemical or physiological
-      signatures that <strong>precede visible symptoms</strong> — creating a window for earlier intervention than
-      current clinical workflows allow.
+      This began as a deliberately small build: a mini maze-solving robot, cheap parts, no kit. An
+      <strong>ESP32</strong> as the brain, <strong>DRV8833</strong> motor drivers running plain brushed DC motors, and
+      ultrasonic sensors reading the walls — enough to do wall-following and dead-end detection without any luxury
+      hardware to hide behind.
     </p>
 
-    <h2>Concept</h2>
+    <h2>Where it's going</h2>
+    <p>
+      After building the <a href="fleet-robotics.html">autonomous-fleets challenge</a> at the IDEAS Clinic, the goal
+      shifted. A single robot solving a maze is a known problem; what I actually want now is a <strong>fleet</strong> of
+      these solving one together — splitting the maze between them, sharing what each has already explored, and
+      converging on a route faster than any one robot could alone.
+    </p>
+    <p>
+      That's a much less forgiving target on hardware this cheap. It means honest odometry from motors with no encoders
+      worth trusting, a wireless link between robots that survives a room full of noise, and a shared map that doesn't
+      fall apart when two robots disagree about where a wall is.
+    </p>
+
+    <h2>The build</h2>
     <ul>
-      <li>Low-power <strong>electrochemical, optical, or MEMS pressure sensors</strong> embedded in a probe continuously capture relevant biomarkers.</li>
-      <li>Data offloads wirelessly via <strong>BLE or NFC</strong> to a bedside hub.</li>
-      <li>The hub handles alerting and surfaces flags to a <strong>nurse-facing dashboard</strong> — designed to support, not replace, clinical judgment.</li>
+      <li><strong>ESP32</strong> — chosen specifically for the built-in Wi-Fi, which is the whole reason the fleet version is plausible.</li>
+      <li><strong>DRV8833 dual H-bridge</strong> drivers for the DC motors, with PWM speed control off the ESP32.</li>
+      <li><strong>HC-SR04 ultrasonic sensors</strong> for wall distance and obstacle detection.</li>
+      <li>Currently breadboarded and battery-powered — the wiring is a mess on purpose, since the pinout is still changing.</li>
     </ul>
 
-    <h2>Current status</h2>
+    <h2>Status</h2>
     <p>
-      Research and scoping: evaluating which complication is the best initial target based on clinical urgency,
-      sensing tractability, and regulatory pathway. No hardware yet — next steps are literature review,
-      clinician interviews, and a benchtop proof of concept for the sensing layer.
-    </p>
-    <p class="detail-note">
-      Why medtech? My family has an interesting medical history, so this space has always fascinated me.
-      I put this project out in the open precisely to collect advice from people who know more than I do.
+      Active build. Single-robot navigation is the working baseline; the fleet coordination layer is what I'm on now.
+      Related: <a href="fleet-robotics.html">Toyota Challenge — Autonomous Fleets</a>.
     </p>
 
   </main>

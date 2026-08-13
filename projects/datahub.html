@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UW DataHub — Sensor Data Backend — Syed Fuzail Farhan</title>
+  <meta name="description" content="Backend for datahub.uwaterloo.ca — building an API for campus environmental sensors that don't have one, so a PhD researcher's data is finally in one place.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23141414'/%3E%3Ctext x='50' y='68' font-size='48' font-family='Arial, sans-serif' font-weight='bold' fill='white' text-anchor='middle'%3ESF%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script>
+    (function () {
+      const saved = localStorage.getItem("theme");
+      if (saved) document.documentElement.dataset.theme = saved;
+    })();
+  </script>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="nav-inner container">
+      <a class="nav-brand" href="../index.html">Syed Fuzail Farhan</a>
+      <nav class="nav-links" id="nav-links">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#experience">Experience</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#contact">Contact</a>
+        <a class="nav-resume" href="../assets/resume.pdf" target="_blank" rel="noopener">Resume</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+        </button>
+        <button class="icon-btn nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="detail">
+    <a class="back-link" href="../index.html#projects">&larr; Back to projects</a>
+    <p class="hero-kicker">Project · IDEAS Clinic · Live</p>
+    <h1>UW DataHub — Sensor Data Backend</h1>
+    <p class="detail-sub">A PhD researcher had environmental sensors scattered across campus and no single place to get the data out of them. Another co-op and I rebuilt the whole platform — I took the backend.</p>
+    <ul class="tags">
+      <li>Python</li>
+      <li>REST APIs</li>
+      <li>Web Scraping</li>
+      <li>Data Pipelines</li>
+      <li>Automation</li>
+      <li>Backend</li>
+    </ul>
+
+    <div class="detail-media">
+      <img src="../assets/img/datahub-1.jpg" alt="The DataHub landing page: a map of the University of Waterloo campus with colour-coded sensor markers and category filters">
+    </div>
+
+    <h2>The problem</h2>
+    <p>
+      A PhD student's research depends on environmental sensors monitoring conditions across the University of Waterloo
+      campus — air, water, weather, traffic. She wanted a <strong>hub</strong>: one place where research groups and
+      students could find those sensors, see what's being measured, and pull the data for themselves instead of
+      emailing someone for a spreadsheet.
+    </p>
+    <p>
+      The catch is that campus sensors have nothing in common. Some are modern instruments with clean REST APIs. Some
+      sit behind a vendor's web portal with no documented API at all. And some, genuinely, only communicate by
+      <strong>emailing you a file</strong> on a schedule. Any hub worth building has to make all of those look the same
+      from the outside.
+    </p>
+
+    <h2>What I built</h2>
+    <p>
+      My half of the rebuild was the backend, and specifically the ingestion layer — <strong>making an API for
+      sensors that don't have one</strong>. That meant a different approach per source:
+    </p>
+    <ul>
+      <li><strong>Existing APIs</strong> — where a real API existed, poll it, normalize the response, and fold it into the shared schema.</li>
+      <li><strong>URL manipulation</strong> — some portals generate data exports through predictable query strings, so the export endpoint <em>is</em> the API once you work out the parameters.</li>
+      <li><strong>Request-level scraping</strong> — rather than driving a browser, I traced the requests a portal's own front end makes and replayed them directly. Faster, far less brittle, and it survives a redesign of the page.</li>
+      <li><strong>Email-only sensors</strong> — automated parsing of the scheduled emails these sensors send, so their readings land in the same pipeline as everything else with no human in the loop.</li>
+    </ul>
+    <p>
+      The point of all of it is that a researcher downloading data from DataHub never has to know which of those four
+      things is happening underneath.
+    </p>
+
+    <h2>An accidental detour</h2>
+    <p>
+      Reverse-engineering one vendor's portal went further than intended and left me looking at rather more of their
+      database than the data I'd gone in for. (I swear I just wanted the readings I already had access to — not other
+      people's usernames and passwords.) A useful reminder that "the data is public if you know the URL" is doing a lot
+      of work in some of these systems.
+    </p>
+
+    <h2>Status</h2>
+    <p>
+      Live at <a href="https://datahub.uwaterloo.ca/#landing" target="_blank" rel="noopener">datahub.uwaterloo.ca</a>.
+      Every sensor the researcher and her group have access to is now ingested and available through the hub — and
+      there's still plenty to tighten up as more sources come online.
+      See also: <a href="../experience/ideas-clinic-2026.html">my current IDEAS Clinic term</a>.
+    </p>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>&copy; 2026 Syed Fuzail Farhan</span>
+      <div class="footer-links">
+        <a href="mailto:sffarhan@uwaterloo.ca">Email</a>
+        <a href="https://linkedin.com/in/syed-fuzail-farhan-3189a6291" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="../assets/resume.pdf" target="_blank" rel="noopener">Resume</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -47,19 +47,40 @@
 
   <main>
     <!-- ============ HERO ============ -->
-    <section class="hero container">
-      <p class="hero-kicker">Mechatronics Engineering · University of Waterloo</p>
-      <h1>Times I didn't want to study</h1>
-      <p class="hero-sub">
-        Firmware on STM32 and ESP32, mechatronic systems from CAD to machined part,
-        and simulations I validate with real experiments. Currently building
-        collaborative robots, Mars-rover firmware, and low-cost prosthetics.
+    <section class="hero-wrap">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-grid"></div>
+        <span class="beam beam-1"></span>
+        <span class="beam beam-2"></span>
+        <span class="beam beam-3"></span>
+      </div>
+      <div class="hero container">
+      <div class="hero-badges" data-hero>
+        <a class="status-pill" href="#contact">
+          <span class="status-dot" aria-hidden="true"></span>
+          Open to co-op opportunities
+        </a>
+        <p class="hero-kicker">Mechatronics Engineering · University of Waterloo</p>
+      </div>
+      <h1 data-hero><span class="shimmer">Times I didn't want to study</span></h1>
+      <p class="hero-rotator" data-hero>
+        Currently building
+        <span class="rotator" aria-live="polite">
+          <span class="rotator-item">an LLM-embodied desk robot</span>
+          <span class="rotator-item">Mars-rover firmware</span>
+          <span class="rotator-item">low-cost prosthetics</span>
+          <span class="rotator-item">a fleet of maze solvers</span>
+        </span>
       </p>
-      <div class="hero-cta">
+      <p class="hero-sub" data-hero>
+        Firmware on STM32 and ESP32, mechatronic systems from CAD to machined part,
+        and simulations I validate with real experiments.
+      </p>
+      <div class="hero-cta" data-hero>
         <a class="btn btn-primary" href="#projects">View Projects</a>
         <a class="btn btn-ghost" href="assets/resume.pdf" target="_blank" rel="noopener">Download Resume</a>
       </div>
-      <div class="hero-social">
+      <div class="hero-social" data-hero>
         <a href="mailto:sffarhan@uwaterloo.ca" aria-label="Email">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
         </a>
@@ -69,6 +90,25 @@
         <a href="https://github.com/fuzail127" target="_blank" rel="noopener" aria-label="GitHub">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.91c.58.11.79-.25.79-.55v-2.17c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12v3.14c0 .3.2.66.8.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
         </a>
+      </div>
+      </div>
+    </section>
+
+    <!-- ============ TECH MARQUEE ============ -->
+    <section class="marquee" aria-label="Tools and technologies I work with">
+      <div class="marquee-track">
+        <ul class="marquee-list">
+          <li>STM32</li><li>ESP32</li><li>Embedded C</li><li>Python</li>
+          <li>FPGA / Quartus</li><li>OpenCV</li><li>SolidWorks</li><li>ANSYS</li>
+          <li>FEA / CFD</li><li>PlatformIO</li><li>CNC Machining</li><li>GD&amp;T</li>
+          <li>3D Printing</li><li>Django</li>
+        </ul>
+        <ul class="marquee-list" aria-hidden="true">
+          <li>STM32</li><li>ESP32</li><li>Embedded C</li><li>Python</li>
+          <li>FPGA / Quartus</li><li>OpenCV</li><li>SolidWorks</li><li>ANSYS</li>
+          <li>FEA / CFD</li><li>PlatformIO</li><li>CNC Machining</li><li>GD&amp;T</li>
+          <li>3D Printing</li><li>Django</li>
+        </ul>
       </div>
     </section>
 
@@ -85,9 +125,9 @@
             microcontroller workshops to hundreds of engineering students.
           </p>
           <p>
-            Right now I'm designing collaborative- and fleet-robotics challenges with a
-            Dobot arm, OpenCV and a floor full of TETRIX robots, building the backend
-            for a campus environmental sensor platform, and writing rover firmware with
+            Over the summer I designed collaborative- and fleet-robotics challenges with a
+            Dobot arm, OpenCV and a floor full of TETRIX robots, and built the backend for a
+            campus environmental sensor platform. Right now I'm writing rover firmware with
             the UW Robotics Team — alongside an EMG-driven prosthetic claw and a
             maze-solving robot I'm trying to turn into a fleet of its own.
           </p>
@@ -122,7 +162,7 @@
 
         <article class="timeline-item">
           <!-- TODO: confirm exact start date of this term -->
-          <div class="timeline-meta">May 2026 – Present</div>
+          <div class="timeline-meta">May 2026 – Aug 2026</div>
           <div class="timeline-body">
             <h3>Research Assistant · IDEAS Clinic, University of Waterloo</h3>
             <ul>

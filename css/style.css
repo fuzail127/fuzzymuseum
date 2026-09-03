@@ -449,17 +449,9 @@ h1, h2, h3 { line-height: 1.2; margin: 0 0 0.5em; }
 .footer-links a { color: var(--text-muted); }
 .footer-links a:hover { color: var(--accent); }
 
-/* ============ Scroll reveal ============ */
-.reveal {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-.reveal.visible { opacity: 1; transform: none; }
-
+/* ============ Motion preferences ============ */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
   .card { transition: none; }
 }
 
@@ -594,3 +586,489 @@ h1, h2, h3 { line-height: 1.2; margin: 0 0 0.5em; }
   padding: 1rem 1.25rem;
   font-size: 0.95rem;
 }
+
+/* ============================================================
+   Personalization layer
+   KokonutUI-inspired surfaces (beams, glass cards, spotlight,
+   shimmer, marquee) + Motion (motion.dev) driven animation.
+   ============================================================ */
+
+:root {
+  --brand-1: #e08b18;   /* amber   — signature */
+  --brand-2: #6366f1;   /* indigo  — beams */
+  --brand-3: #14b8a6;   /* teal    — beams */
+  --brand-ink: #96590a;  /* amber, darkened to stay readable as text */
+  --beam-alpha: 0.30;
+  --glow: rgba(224, 139, 24, 0.16);
+  --grid-line: rgba(20, 20, 20, 0.055);
+  --glass: rgba(255, 255, 255, 0.72);
+  --glass-top: rgba(255, 255, 255, 0.9);
+  --shine: rgba(255, 255, 255, 0.55);
+  --ring: linear-gradient(135deg, var(--brand-1), var(--brand-2) 55%, var(--brand-3));
+}
+
+[data-theme="dark"] {
+  --brand-ink: #f0ac3f;
+  --beam-alpha: 0.22;
+  --glow: rgba(224, 139, 24, 0.20);
+  --grid-line: rgba(241, 239, 234, 0.05);
+  --glass: rgba(28, 28, 28, 0.62);
+  --glass-top: rgba(48, 48, 48, 0.5);
+  --shine: rgba(255, 255, 255, 0.22);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --brand-ink: #f0ac3f;
+    --beam-alpha: 0.22;
+    --glow: rgba(224, 139, 24, 0.20);
+    --grid-line: rgba(241, 239, 234, 0.05);
+    --glass: rgba(28, 28, 28, 0.62);
+    --glass-top: rgba(48, 48, 48, 0.5);
+    --shine: rgba(255, 255, 255, 0.22);
+  }
+}
+
+/* ---------- Scroll progress (rides the nav's bottom border) ---------- */
+.scroll-progress {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: var(--ring);
+  z-index: 1;
+}
+
+/* ---------- Nav link underline ---------- */
+.nav-links a:not(.nav-resume) { position: relative; }
+.nav-links a:not(.nav-resume)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ring);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-links a:not(.nav-resume):hover::after { transform: scaleX(1); }
+
+/* ---------- Hero: beams + grid backdrop ---------- */
+.hero-wrap {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.hero-wrap .hero { position: relative; z-index: 1; }
+
+.hero-bg {
+  position: absolute;
+  inset: -20% -10% 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 30% 30%, #000 10%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 60% at 30% 30%, #000 10%, transparent 75%);
+}
+
+.beam {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(70px);
+  opacity: var(--beam-alpha);
+  will-change: transform;
+}
+.beam-1 {
+  width: 46%; height: 55%;
+  left: -6%; top: 8%;
+  background: radial-gradient(circle at 50% 50%, var(--brand-1), transparent 70%);
+  animation: beam-drift-a 19s ease-in-out infinite alternate;
+}
+.beam-2 {
+  width: 40%; height: 60%;
+  right: 2%; top: -6%;
+  background: radial-gradient(circle at 50% 50%, var(--brand-2), transparent 70%);
+  animation: beam-drift-b 23s ease-in-out infinite alternate;
+}
+.beam-3 {
+  width: 34%; height: 40%;
+  left: 38%; bottom: -8%;
+  background: radial-gradient(circle at 50% 50%, var(--brand-3), transparent 70%);
+  animation: beam-drift-c 27s ease-in-out infinite alternate;
+}
+
+@keyframes beam-drift-a {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(9%, -7%, 0) scale(1.18); }
+}
+@keyframes beam-drift-b {
+  from { transform: translate3d(0, 0, 0) scale(1.1); }
+  to   { transform: translate3d(-11%, 9%, 0) scale(0.92); }
+}
+@keyframes beam-drift-c {
+  from { transform: translate3d(0, 0, 0) scale(0.95); }
+  to   { transform: translate3d(-8%, -11%, 0) scale(1.22); }
+}
+
+/* ---------- Status pill ---------- */
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.1rem;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.85rem 0.3rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--glass);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+}
+.status-pill:hover { text-decoration: none; border-color: var(--accent); }
+
+.status-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand-1);
+  flex: none;
+}
+.status-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--brand-1);
+  animation: pulse-ring 2s ease-out infinite;
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  70%  { transform: scale(2.8); opacity: 0; }
+  100% { transform: scale(2.8); opacity: 0; }
+}
+
+.hero-badges .hero-kicker { margin: 0; color: var(--text-muted); font-weight: 500; }
+
+/* ---------- Shimmer headline ---------- */
+.shimmer {
+  background: linear-gradient(
+    100deg,
+    var(--text) 0%, var(--text) 38%,
+    var(--brand-1) 48%, var(--text) 58%,
+    var(--text) 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer-sweep 7s ease-in-out infinite;
+}
+@keyframes shimmer-sweep {
+  0%, 22%   { background-position: 160% 0; }
+  60%, 100% { background-position: -60% 0; }
+}
+
+/* ---------- Rotating role line ---------- */
+.hero-rotator {
+  font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+  font-weight: 600;
+  color: var(--text-muted);
+  margin: 0.4rem 0 0;
+}
+
+.rotator {
+  display: inline-grid;
+  vertical-align: bottom;
+  text-align: left;
+}
+.rotator-item {
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  color: var(--brand-ink);
+  white-space: nowrap;
+}
+.rotator-item:first-child { opacity: 1; visibility: visible; }
+
+/* ---------- Shine on the primary button ---------- */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  top: -60%;
+  bottom: -60%;
+  width: 45%;
+  left: -70%;
+  background: linear-gradient(90deg, transparent, var(--shine), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+.btn-primary:hover::after { animation: btn-shine 0.75s ease-out; }
+@keyframes btn-shine {
+  from { left: -70%; }
+  to   { left: 130%; }
+}
+
+/* ---------- Tech marquee ---------- */
+.marquee {
+  position: relative;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 0.9rem 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 42s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+.marquee-list {
+  display: flex;
+  align-items: center;
+  gap: 2.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0 1.125rem;
+}
+.marquee-list li {
+  display: flex;
+  align-items: center;
+  gap: 2.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.marquee-list li::after {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--brand-1);
+  opacity: 0.5;
+}
+@keyframes marquee-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+/* ---------- Section headings ---------- */
+.section-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.1rem;
+  padding: 0.15rem 0.45rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--brand-ink);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8rem;
+}
+
+/* ---------- Liquid-glass project cards + cursor spotlight ---------- */
+.card {
+  position: relative;
+  background:
+    linear-gradient(180deg, var(--glass-top), transparent 40%),
+    var(--glass);
+  backdrop-filter: blur(12px) saturate(1.4);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.25s ease,
+              border-color 0.25s ease;
+}
+.card:hover {
+  border-color: transparent;
+  box-shadow: var(--shadow), 0 18px 40px -18px var(--glow);
+}
+
+/* cursor-tracked glow */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(
+    340px circle at var(--mx, 50%) var(--my, 0%),
+    var(--glow),
+    transparent 62%
+  );
+}
+.card:hover::before { opacity: 1; }
+
+/* gradient ring on hover */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--ring);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+.card:hover::after { opacity: 0.85; }
+
+.card-media img { transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+.card:hover .card-media img { transform: scale(1.045); }
+
+.card-body { position: relative; z-index: 2; }
+
+.read-more { position: relative; display: inline-flex; align-items: center; gap: 0.3rem; }
+.read-more:hover { text-decoration: none; }
+.read-more::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1.5px;
+  background: var(--ring);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.read-more:hover::after { transform: scaleX(1); }
+
+/* ---------- Tags ---------- */
+.tags li {
+  border: 1px solid transparent;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.tags li:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--brand-1) 45%, transparent);
+}
+
+/* ---------- Timeline: scroll-drawn spine ---------- */
+.timeline { position: relative; }
+.timeline-progress {
+  position: absolute;
+  left: -2px;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: var(--ring);
+  transform: scaleY(0);
+  transform-origin: 50% 0;
+}
+.timeline-item::before {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  z-index: 1;
+}
+.timeline-item:hover::before {
+  border-color: var(--brand-1);
+  box-shadow: 0 0 0 5px var(--glow);
+}
+
+/* ---------- Education polish ---------- */
+.edu-card {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, var(--glass-top), transparent 40%),
+    var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.edu-badge {
+  background: linear-gradient(135deg, var(--brand-1), #a85f0c);
+  color: #fff;
+}
+
+/* ---------- Motion entrance: applied only once Motion has loaded ---------- */
+.motion-ready [data-anim],
+.motion-ready [data-hero] { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .beam,
+  .status-dot::after,
+  .shimmer,
+  .marquee-track,
+  .btn-primary:hover::after { animation: none !important; }
+  .shimmer {
+    background: none;
+    color: var(--text);
+    -webkit-text-fill-color: currentColor;
+  }
+  .card,
+  .card-media img,
+  .read-more::after,
+  .nav-links a::after { transition: none; }
+  .motion-ready [data-anim],
+  .motion-ready [data-hero] { opacity: 1; }
+  .timeline-progress { transform: scaleY(1); }
+}
+
+@media (max-width: 700px) {
+  .hero-badges { gap: 0.5rem; }
+  .marquee-list { gap: 1.5rem; }
+  .marquee-list li { gap: 1.5rem; font-size: 0.78rem; }
+}
+
+/* ---------- Ambient backdrop for the project / experience pages ---------- */
+body:has(.detail) { position: relative; }
+body:has(.detail)::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(55% 45% at 88% -8%, color-mix(in srgb, var(--brand-2) 20%, transparent), transparent 70%),
+    radial-gradient(45% 35% at 2% -4%, color-mix(in srgb, var(--brand-1) 22%, transparent), transparent 70%),
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: auto, auto, 56px 56px, 56px 56px;
+  -webkit-mask-image: linear-gradient(#000, transparent 55%);
+  mask-image: linear-gradient(#000, transparent 55%);
+  opacity: 0.55;
+}
+body:has(.detail) .detail,
+body:has(.detail) .footer { position: relative; z-index: 1; }

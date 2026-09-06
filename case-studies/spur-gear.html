@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Involute Spur Gear Stresses — AGMA vs FEA — Syed Fuzail Farhan</title>
+  <meta name="description" content="A case study comparing AGMA analytical predictions for root and contact stress in involute spur gears against FEA in Ansys Discovery and Ansys Mechanical.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23141414'/%3E%3Ctext x='50' y='68' font-size='48' font-family='Arial, sans-serif' font-weight='bold' fill='white' text-anchor='middle'%3ESF%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script>
+    (function () {
+      const saved = localStorage.getItem("theme");
+      if (saved) document.documentElement.dataset.theme = saved;
+    })();
+  </script>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="nav-inner container">
+      <a class="nav-brand" href="../index.html">Syed Fuzail Farhan</a>
+      <nav class="nav-links" id="nav-links">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#experience">Experience</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#case-studies">Case Studies</a>
+        <a href="../index.html#contact">Contact</a>
+        <a class="nav-resume" href="../assets/resume.pdf" target="_blank" rel="noopener">Resume</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+        </button>
+        <button class="icon-btn nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="detail">
+    <a class="back-link" href="../index.html#case-studies">&larr; Back to case studies</a>
+    <p class="hero-kicker">Case Study · Structural FEA</p>
+    <h1>Involute Spur Gear Root &amp; Contact Stresses</h1>
+    <p class="detail-sub">
+      How closely does the AGMA standard agree with FEA on a pair of meshing spur gears? On root stress, very
+      closely. On contact stress, not at all — until the model was rebuilt properly.
+    </p>
+    <ul class="tags">
+      <li>Ansys Discovery</li>
+      <li>Ansys Mechanical</li>
+      <li>FEA</li>
+      <li>AGMA 2001-D04</li>
+      <li>Contact Mechanics</li>
+      <li>Mesh Convergence</li>
+    </ul>
+
+    <div class="detail-media">
+      <img src="../assets/img/spur-gear-1.jpg" alt="Two meshing spur gears in Ansys Discovery under a 32 N·m moment, shaded by Von Mises stress">
+      <img src="../assets/img/spur-gear-2.jpg" alt="Close-up of the stress concentration at a gear tooth root and the contact surface of the opposing tooth">
+      <img src="../assets/img/spur-gear-3.jpg" alt="Refined Ansys Mechanical result showing minimum principal stress of 838 MPa at the tooth contact patch">
+    </div>
+
+    <div class="detail-note">
+      Written with Owen Grimm and Jessica Liu at the IDEAS Clinic, University of Waterloo.
+    </div>
+
+    <h2>The model</h2>
+    <p>
+      Two identical involute spur gears: 10 mm face width, 30 teeth, 2 mm transverse module, 20° pressure angle,
+      structural steel. One bore takes a fixed support to stand in for the load, the other a hinged support as the
+      transmitting gear, with a <strong>32 N·m</strong> moment applied clockwise — 1 kN acting at the 32 mm from
+      tooth to centre. The setup deliberately assumes the worst case for a spur gear: the moment when only a
+      <strong>single pair of teeth</strong> is carrying the load.
+    </p>
+    <p>
+      Two failure modes are checked against AGMA's ANSI/AGMA 2001-D04 methodology, which models a tooth as a
+      cantilevered beam and layers on empirical factors for overload, dynamics, size, load distribution and rim
+      thickness:
+    </p>
+    <ul>
+      <li><strong>Root failure</strong> — the tooth bending at its base. AGMA gives <strong>139.34 MPa</strong>.</li>
+      <li><strong>Pitting</strong> — contact stress cratering the tooth surface under cyclic load. AGMA gives <strong>883.3 MPa</strong>.</li>
+    </ul>
+
+    <h2>Discovery: one answer right, one badly wrong</h2>
+    <p>
+      Running in Discovery's Refine mode, the load visibly concentrates in exactly the two places the theory says it
+      should — the root of the driving tooth and the contact surface of the tooth it pushes against. Root stress came
+      out at <strong>135 MPa, a 3.11% error</strong> against AGMA. That part worked.
+    </p>
+    <p>
+      Pitting stress came out at <strong>210 MPa against a predicted 883 MPa — 76.2% error</strong>. Sweeping local
+      mesh fidelity from 0.0006 m down to 0.0003 m didn't rescue it; the value wandered without ever settling:
+    </p>
+    <ul>
+      <li>0.00060 m → root 131 MPa, pitting 158 MPa</li>
+      <li>0.00050 m → root 133 MPa, pitting 173 MPa</li>
+      <li>0.00040 m → root 133 MPa, pitting 186 MPa</li>
+      <li>0.00030 m → root 135 MPa, pitting 210 MPa</li>
+    </ul>
+    <p>
+      Cross-checking the AGMA contact equation against a Hertzian line-contact calculation showed the two agreeing —
+      so the analytical side wasn't the problem. <strong>The absence of convergence was itself the finding:</strong>
+      a contact solution that refuses to settle under mesh refinement is under-defined, not merely under-resolved.
+    </p>
+
+    <h2>Rebuilding it in Mechanical</h2>
+    <p>
+      Discovery 2026 R1 doesn't expose enough control over contact behaviour to fix that, so the model moved to
+      <strong>Ansys Mechanical</strong>. Supports, moment and frictionless contact carried over unchanged; what
+      changed was the contact definition, rebuilt following S.D. Patel's thesis on FEA of involute gear stresses so
+      that a single-tooth approach would hold up across the full gear. Local fidelity was set to 2.73e-4 m on the
+      same three faces.
+    </p>
+    <p>
+      Minimum principal stress at the contact patch came out at <strong>838 MPa — 5.13% error</strong>, down from
+      76.2%. Root stress drifted slightly to <strong>6.93%</strong>, still comfortably acceptable. Trading a little
+      accuracy on the mode that was already right to fix the one that was broken was the correct call.
+    </p>
+
+    <h2>Things that were tried and rejected</h2>
+    <ul>
+      <li><strong>Distributed force instead of a moment.</strong> Stress propagated through both gears rather than concentrating on the fixed one — physically wrong for this load case.</li>
+      <li><strong>Varying gear centre distance.</strong> Stresses did rise with separation, exactly as a longer moment arm predicts, but only at spacings where real gears would skip teeth. Correct trend, useless model.</li>
+    </ul>
+
+    <h2>Why the two methods disagree at all</h2>
+    <p>
+      AGMA's contact stress equation rests on Hertzian line contact — two cylinders meeting along a line a few
+      microns wide, carrying uniform load across the full face width. FEA imposes none of that and resolves the
+      actual three-dimensional contact instead. AGMA is the better tool for a standardised, conservative rating;
+      FEA is the better tool for geometry the standard was never written for — non-involute profiles, partially
+      supported teeth, anisotropic materials. The useful conclusion is knowing which question each one answers.
+    </p>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>&copy; 2026 Syed Fuzail Farhan</span>
+      <div class="footer-links">
+        <a href="mailto:sffarhan@uwaterloo.ca">Email</a>
+        <a href="https://linkedin.com/in/syed-fuzail-farhan-3189a6291" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="../assets/resume.pdf" target="_blank" rel="noopener">Resume</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

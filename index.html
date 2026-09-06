@@ -30,6 +30,7 @@
         <a href="#about">About</a>
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
+        <a href="#case-studies">Case Studies</a>
         <a href="#contact">Contact</a>
         <a class="nav-resume" href="assets/resume.pdf" target="_blank" rel="noopener">Resume</a>
       </nav>
@@ -191,7 +192,7 @@
             <h3>Research Assistant · IDEAS Clinic, University of Waterloo</h3>
             <ul>
               <li>Co-designed a 3-day ANSYS FEA/CFD workshop for 70+ students and a 4-day MCU + FPGA workshop for 60+, covering PWM, serial communication, and circuit debugging.</li>
-              <li>Built industry-backed simulation case studies with ANSYS (heat exchangers, schlieren imaging, shoulder implant, hands-free crutch), fabricating physical test models that matched simulation within ~80%.</li>
+              <li>Built industry-backed simulation case studies with ANSYS (<a href="case-studies/heat-exchanger.html">heat exchangers</a>, schlieren imaging, shoulder implant, hands-free crutch), fabricating physical test models that matched simulation within ~80%.</li>
               <li>Supported a PhD researcher's defense by simulating shoulder-replacement surgery with FEA.</li>
             </ul>
             <a class="read-more" href="experience/ideas-clinic-2025.html">Read more →</a>
@@ -462,9 +463,67 @@
       </div>
     </section>
 
+    <!-- ============ CASE STUDIES ============ -->
+    <section class="section container" id="case-studies">
+      <h2 class="section-title"><span class="section-num">04</span> Case Studies</h2>
+      <p class="section-lead">
+        Simulation case studies written at the IDEAS Clinic — each one pairs an analytical or
+        experimental result against a simulation, and treats the disagreement between them as the
+        thing worth writing about.
+      </p>
+      <div class="projects-grid">
+
+        <article class="card">
+          <div class="card-media">
+            <img src="assets/img/heat-exchanger-1.jpg" alt="The assembled 3D-printed cross-flow heat exchanger with faucet and hairdryer adaptors attached" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <h3>3D-Printed Compact Heat Exchanger</h3>
+              <span class="badge badge-done">Published</span>
+            </div>
+            <p>
+              A cross-flow heat exchanger printed in copper-filled PLA, measured on the bench, then
+              rebuilt as a conjugate heat transfer simulation in Ansys Discovery. I characterized the
+              filament's unpublished thermal properties with a thermal camera and a heated print bed,
+              and traced the experiment–simulation gap to print porosity, backpressure and where the
+              thermocouple was sitting. Published by Ansys as an education resource.
+            </p>
+            <ul class="tags">
+              <li>Ansys Discovery</li><li>CFD</li><li>Conjugate Heat Transfer</li><li>3D Printing</li><li>Validation</li>
+            </ul>
+            <a class="read-more" href="case-studies/heat-exchanger.html">Read more &rarr;</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-media">
+            <img src="assets/img/spur-gear-1.jpg" alt="Two meshing spur gears in Ansys Discovery shaded by Von Mises stress" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <h3>Involute Spur Gear Root &amp; Contact Stresses</h3>
+              <span class="badge badge-done">Delivered</span>
+            </div>
+            <p>
+              AGMA's ANSI/AGMA 2001-D04 methodology against FEA on a pair of meshing spur gears. Root
+              stress agreed to 3.11%; contact stress was 76.2% off and never converged under mesh
+              refinement — which was itself the clue. Rebuilding the contact definition in Ansys
+              Mechanical brought it to 5.13%.
+            </p>
+            <ul class="tags">
+              <li>Ansys Mechanical</li><li>FEA</li><li>AGMA 2001-D04</li><li>Contact Mechanics</li><li>Convergence</li>
+            </ul>
+            <a class="read-more" href="case-studies/spur-gear.html">Read more &rarr;</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
     <!-- ============ EDUCATION ============ -->
     <section class="section container" id="education">
-      <h2 class="section-title"><span class="section-num">04</span> Education</h2>
+      <h2 class="section-title"><span class="section-num">05</span> Education</h2>
       <div class="edu-card">
         <div>
           <h3>University of Waterloo</h3>
@@ -476,7 +535,7 @@
 
     <!-- ============ CONTACT ============ -->
     <section class="section container contact" id="contact">
-      <h2 class="section-title"><span class="section-num">05</span> Contact</h2>
+      <h2 class="section-title"><span class="section-num">06</span> Contact</h2>
       <p class="contact-lead">
         I'm always happy to talk hardware, firmware, or medtech — or co-op opportunities.
       </p>

@@ -83,6 +83,7 @@ if (!reducedMotion) {
       const revealTargets = document.querySelectorAll(
         [
           ".section-title",
+          ".section-lead",
           ".about-text p",
           ".skill-group",
           ".timeline-item",

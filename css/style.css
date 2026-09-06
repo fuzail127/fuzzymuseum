@@ -724,56 +724,6 @@ h1, h2, h3 { line-height: 1.2; margin: 0 0 0.5em; }
   to   { transform: translate3d(-8%, -11%, 0) scale(1.22); }
 }
 
-/* ---------- Status pill ---------- */
-.hero-badges {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.1rem;
-}
-
-.status-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.3rem 0.85rem 0.3rem 0.6rem;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--glass);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--text);
-  white-space: nowrap;
-}
-.status-pill:hover { text-decoration: none; border-color: var(--accent); }
-
-.status-dot {
-  position: relative;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--brand-1);
-  flex: none;
-}
-.status-dot::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: var(--brand-1);
-  animation: pulse-ring 2s ease-out infinite;
-}
-@keyframes pulse-ring {
-  0%   { transform: scale(1);   opacity: 0.7; }
-  70%  { transform: scale(2.8); opacity: 0; }
-  100% { transform: scale(2.8); opacity: 0; }
-}
-
-.hero-badges .hero-kicker { margin: 0; color: var(--text-muted); font-weight: 500; }
-
 /* ---------- Shimmer headline ---------- */
 .shimmer {
   background: linear-gradient(
@@ -1036,7 +986,6 @@ h1, h2, h3 { line-height: 1.2; margin: 0 0 0.5em; }
 
 @media (prefers-reduced-motion: reduce) {
   .beam,
-  .status-dot::after,
   .shimmer,
   .marquee-track,
   .btn-primary:hover::after { animation: none !important; }
@@ -1055,7 +1004,6 @@ h1, h2, h3 { line-height: 1.2; margin: 0 0 0.5em; }
 }
 
 @media (max-width: 700px) {
-  .hero-badges { gap: 0.5rem; }
   .marquee-list { gap: 1.5rem; }
   .marquee-list li { gap: 1.5rem; font-size: 0.78rem; }
 }

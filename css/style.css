@@ -565,6 +565,18 @@ h1, h2, h3 { line-height: 1.2; margin: 0 0 0.5em; }
 .detail-media img:nth-child(2):not(:last-child) { grid-column: 1; }
 .detail-media img:nth-child(3) { grid-column: 2; }
 
+/* stacked variant: wide simulation captures are unreadable in the
+   side-by-side pair, so give them the full column, uncropped */
+.detail-media.is-stacked {
+  width: min(460px, 48%);
+  grid-template-columns: 1fr;
+}
+.detail-media.is-stacked img {
+  grid-column: 1 / -1;
+  height: auto;
+  object-fit: contain;
+}
+
 /* keep floated media from spilling past the page content */
 .detail::after {
   content: "";
@@ -577,6 +589,9 @@ h1, h2, h3 { line-height: 1.2; margin: 0 0 0.5em; }
     float: none;
     width: 100%;
     margin: 1.5rem 0;
+  }
+  .detail-media.is-stacked {
+    width: 100%;
   }
 }
 

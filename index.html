@@ -32,7 +32,7 @@
         <a href="#projects">Projects</a>
         <a href="#case-studies">Case Studies</a>
         <a href="#contact">Contact</a>
-        <a class="nav-resume" href="assets/resume.pdf?v=32f9b2efc405" target="_blank" rel="noopener">Resume</a>
+        <a class="nav-resume" href="assets/resume.pdf?v=17a6b9e03f5a" target="_blank" rel="noopener">Resume</a>
       </nav>
       <div class="nav-actions">
         <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode">
@@ -73,7 +73,7 @@
       </p>
       <div class="hero-cta" data-hero>
         <a class="btn btn-primary" href="#projects">View Projects</a>
-        <a class="btn btn-ghost" href="assets/resume.pdf?v=32f9b2efc405" target="_blank" rel="noopener">Download Resume</a>
+        <a class="btn btn-ghost" href="assets/resume.pdf?v=17a6b9e03f5a" target="_blank" rel="noopener">Download Resume</a>
       </div>
       <div class="hero-social" data-hero>
         <a href="mailto:sffarhan@uwaterloo.ca" aria-label="Email">
@@ -115,16 +115,19 @@
           <p>
             I'm a Mechatronics Engineering student at the University of Waterloo who likes
             projects that need a soldering iron, a 3D printer, and a debugger all in the
-            same afternoon. I've written motor-control firmware for electric vehicles,
-            automated quantum-chemistry pipelines in Python, and taught FEA/CFD and
-            microcontroller workshops to hundreds of engineering students.
+            same afternoon. I've configured embedded firmware on STM32 and ESP32,
+            automated quantum-chemistry pipelines in Python, and helped develop FEA/CFD
+            and microcontroller workshops for engineering students.
           </p>
           <p>
             In my last co-op I designed collaborative- and fleet-robotics challenges with a
             Dobot arm, OpenCV and a floor full of TETRIX robots, and built the backend for a
-            campus environmental sensor platform. Right now I'm writing rover firmware with
-            the UW Robotics Team — alongside an EMG-driven prosthetic claw and a
-            maze-solving robot I'm trying to turn into a fleet of its own.
+            campus environmental sensor platform. I'm now an
+            <a href="experience/bedi-research.html">undergraduate research assistant with Prof. Sanjeev Bedi</a>,
+            exploring how two independently navigating TETRIX robots can detect one another
+            and coordinate around path conflicts. With the
+            <a href="experience/uwrt.html">UW Robotics Team</a>, I've established micro-ROS
+            messaging over USART3 and am working on the rover's Ethernet communication interface.
           </p>
         </div>
         <div class="skills">
@@ -143,7 +146,7 @@
           <div class="skill-group">
             <h3>Tools &amp; Platforms</h3>
             <ul class="tags">
-              <li>STM32</li><li>ESP32</li><li>FPGA / Quartus</li><li>Arduino</li><li>SolidWorks</li><li>AutoCAD</li><li>ANSYS</li><li>Git</li><li>Django</li><li>Matlab</li>
+              <li>STM32</li><li>ESP32</li><li>FreeRTOS</li><li>micro-ROS</li><li>LwIP</li><li>FPGA / Quartus</li><li>Arduino</li><li>SolidWorks</li><li>AutoCAD</li><li>ANSYS</li><li>Git</li><li>Django</li><li>Matlab</li>
             </ul>
           </div>
         </div>
@@ -156,27 +159,41 @@
       <div class="timeline">
 
         <article class="timeline-item">
-          <!-- TODO: confirm exact start date of this term -->
-          <div class="timeline-meta">May 2026 – Aug 2026</div>
+          <div class="timeline-meta">Oct 2026 – Present</div>
           <div class="timeline-body">
-            <h3>Research Assistant · IDEAS Clinic, University of Waterloo</h3>
+            <h3>Undergraduate Research Assistant · University of Waterloo</h3>
             <ul>
-              <li>Designed and stress-tested two sub-problems for the Toyota Innovation Challenge: a <a href="projects/toyota-cobot.html">collaborative-robotics cell</a> (Dobot arm + OpenCV + a YOLO hand-detection interlock) and an <a href="projects/fleet-robotics.html">autonomous-fleet challenge</a> coordinating multiple TETRIX robots over TCP.</li>
-              <li>Built the sensor-data backend for <a href="https://datahub.uwaterloo.ca" target="_blank" rel="noopener">datahub.uwaterloo.ca</a>: writing an API for sensors that don't have one — REST ingestion, URL manipulation, request-level scraping, and automated parsing of sensors that only report by email.</li>
-              <li>Prototyped the "GrowBot", an LLM-embodied robot, with the creator of <em>I gave ChatGPT a body</em> — now continued as a personal build.</li>
+              <li>Beginning research under <strong>Prof. Sanjeev Bedi</strong> on two TETRIX robots navigating independently on a grid. The goal is for the robots to stop on visual detection, communicate, and resolve potential path conflicts.</li>
+              <li>Planned sensing uses <strong>4–6 cameras per robot</strong> for intended 360-degree coverage, with a multiplexer routing multiple camera inputs through one output.</li>
             </ul>
-            <a class="read-more" href="experience/ideas-clinic-2026.html">Read more →</a>
+            <a class="read-more" href="experience/bedi-research.html">Read more →</a>
           </div>
         </article>
 
         <article class="timeline-item">
-          <div class="timeline-meta">June 2026 – Present</div>
+          <div class="timeline-meta">Jun 2026 – Present</div>
           <div class="timeline-body">
-            <h3>Firmware Team Member · UW Robotics Team (Mars Rover)</h3>
+            <h3>Firmware Developer · UW Robotics Team (Mars Rover)</h3>
             <ul>
-              <li>Migrating arm–rover communication protocols to Ethernet connectivity between two NVIDIA Jetsons and an STM32 board for the team's competition rover.</li>
+              <li>Established <strong>micro-ROS message exchange</strong> between an STM32 NUCLEO-F439ZI and a host Agent over USB/USART3, using FreeRTOS and DMA-backed serial transport.</li>
+              <li>Configured LwIP/UDP, RMII Ethernet, and static IP addressing; verified basic connectivity from Windows and Ubuntu/WSL. Currently investigating missing Agent traffic using CubeIDE breakpoints, DMA status registers, and tcpdump.</li>
+              <li>Contributing to the STM32 interface for a rover with two NVIDIA Jetsons, aiming to move time-sensitive I/O and preprocessing off the Ubuntu-based arm and rover computers.</li>
             </ul>
             <a class="read-more" href="experience/uwrt.html">Read more →</a>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-meta">May 2026 – Aug 2026</div>
+          <div class="timeline-body">
+            <h3>Research Assistant · IDEAS Clinic, University of Waterloo</h3>
+            <ul>
+              <li>Designed and tested two sub-problems for the Toyota Innovation Challenge: a <a href="projects/toyota-cobot.html">collaborative-robotics cell</a> (Dobot arm + OpenCV + a prototype YOLO hand-detection motion pause) and an <a href="projects/fleet-robotics.html">autonomous-fleet challenge</a> coordinating multiple TETRIX robots over TCP. Worked through quick R&amp;D iterations to meet project deadlines.</li>
+              <li>Reduced contact-stress error against AGMA calculations from <strong>76.2% to 5.13%</strong> by investigating mesh convergence and rebuilding an ANSYS Mechanical contact model for a <a href="case-studies/spur-gear.html">spur-gear study</a>.</li>
+              <li>Built the sensor-data backend for <a href="https://datahub.uwaterloo.ca" target="_blank" rel="noopener">datahub.uwaterloo.ca</a>: writing an API for sensors that don't have one — REST ingestion, URL manipulation, request-level scraping, and automated parsing of sensors that only report by email.</li>
+              <li>Prototyped the "GrowBot", an LLM-embodied robot, with the creator of <em>I gave ChatGPT a body</em> — now continued as a personal build.</li>
+            </ul>
+            <a class="read-more" href="experience/ideas-clinic-2026.html">Read more →</a>
           </div>
         </article>
 
@@ -198,8 +215,7 @@
           <div class="timeline-body">
             <h3>Firmware Engineer · Electrium Design Team</h3>
             <ul>
-              <li>Developing a custom electronic speed controller (ESC) for personal electric vehicles on ESP32 using the Espressif framework in PlatformIO.</li>
-              <li>Implemented 3-phase BLDC motor control with field-oriented control (FOC) and configured DRV8353 gate drivers for high-speed MOSFET switching.</li>
+              <li>Contributed to firmware/configuration for an ESP32-based electronic speed controller project, setting up PWM on an ESP and configuring DRV8353 gate-driver settings.</li>
             </ul>
             <a class="read-more" href="experience/electrium.html">Read more →</a>
           </div>
@@ -260,11 +276,11 @@
               A collaborative-robotics challenge designed with Toyota. A Dobot Magician
               arm and an Orbbec camera run an OpenCV pipeline that finds objects by
               colour, picks them up, and sorts them into trays — with a YOLO hand
-              detector layered on top so the arm stops dead the instant a human hand
-              enters the work zone, and stays stopped until it's clear.
+              detector layered on top to prototype pausing arm motion while a hand
+              is detected in the work zone.
             </p>
             <ul class="tags">
-              <li>OpenCV</li><li>YOLO</li><li>Dobot Arm</li><li>Python</li><li>HRI Safety</li>
+              <li>OpenCV</li><li>YOLO</li><li>Dobot Arm</li><li>Python</li><li>Hand Detection</li>
             </ul>
             <a class="read-more" href="projects/toyota-cobot.html">Read more →</a>
           </div>
@@ -351,7 +367,7 @@
               <span class="badge badge-wip">Work in progress</span>
             </div>
             <p>
-              A step toward a cost-effective, open-source prosthetic. A MyoWare EMG sensor
+              A step toward a cost-effective, open-source prosthetic. An analog EMG sensor
               captures muscle activation; an ESP32 processes the analog signal and drives a
               servo so a 3D-printed claw opens and closes with the user's hand. Currently
               iterating on TPU claw geometries and more reliable electrode placement.
@@ -376,7 +392,7 @@
               Programmed and characterized a two-axis positioning machine on the STM32F401RE:
               ADC input from a potentiometer mapped to stepper speed, polling and
               interrupt-driven GPIO synchronization, and limit-switch logic to prevent
-              mechanical over-travel — precise, closed-loop platform positioning.
+              mechanical over-travel.
             </p>
             <ul class="tags">
               <li>STM32</li><li>Embedded C</li><li>ADC / UART / GPIO</li><li>Stepper Motors</li>
@@ -439,16 +455,15 @@
           <div class="card-body">
             <div class="card-top">
               <h3>Mars Rover Firmware — UW Robotics Team</h3>
-              <span class="badge badge-research">Just started</span>
+              <span class="badge badge-wip">Ethernet integration</span>
             </div>
             <p>
-              Firmware for the University of Waterloo Robotics Team's competition Mars
-              rover. My focus: migrating the communication protocol between the robotic
-              arm and the rover to Ethernet connectivity spanning two NVIDIA Jetsons
-              and an STM32 board.
+              Working micro-ROS messaging over USB/USART3 on an STM32 NUCLEO-F439ZI.
+              Now testing LwIP/UDP over Ethernet and debugging Agent traffic as part of
+              the communication interface for a rover with two NVIDIA Jetsons.
             </p>
             <ul class="tags">
-              <li>STM32</li><li>NVIDIA Jetson</li><li>Ethernet</li><li>Firmware</li>
+              <li>STM32</li><li>micro-ROS</li><li>FreeRTOS</li><li>Ethernet / UDP</li><li>LwIP</li>
             </ul>
             <a class="read-more" href="experience/uwrt.html">Read more →</a>
           </div>
@@ -521,7 +536,7 @@
       <div class="edu-card">
         <div>
           <h3>University of Waterloo</h3>
-          <p>Bachelor of Applied Science, Mechatronics Engineering</p>
+          <p>Bachelor of Applied Science, Mechatronics Engineering (Co-op) · 2023–2028</p>
         </div>
         <span class="edu-badge">BASc</span>
       </div>
@@ -544,7 +559,7 @@
         <a href="mailto:sffarhan@uwaterloo.ca">Email</a>
         <a href="https://www.linkedin.com/in/fuzail-farhan/" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://github.com/fuzail127" target="_blank" rel="noopener">GitHub</a>
-        <a href="assets/resume.pdf?v=32f9b2efc405" target="_blank" rel="noopener">Resume</a>
+        <a href="assets/resume.pdf?v=17a6b9e03f5a" target="_blank" rel="noopener">Resume</a>
       </div>
     </div>
   </footer>

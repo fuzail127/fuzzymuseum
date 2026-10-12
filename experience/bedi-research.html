@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Robot Research · Prof. Sanjeev Bedi — Syed Fuzail Farhan</title>
+  <meta name="description" content="Undergraduate robotics research with Prof. Sanjeev Bedi at Waterloo: independent TETRIX navigation, planned multi-camera sensing, and robot-to-robot path coordination.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23141414'/%3E%3Ctext x='50' y='68' font-size='48' font-family='Arial, sans-serif' font-weight='bold' fill='white' text-anchor='middle'%3ESF%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script>
+    (function () {
+      const saved = localStorage.getItem("theme");
+      if (saved) document.documentElement.dataset.theme = saved;
+    })();
+  </script>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="nav-inner container">
+      <a class="nav-brand" href="../index.html">Syed Fuzail Farhan</a>
+      <nav class="nav-links" id="nav-links">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#experience">Experience</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#case-studies">Case Studies</a>
+        <a href="../index.html#contact">Contact</a>
+        <a class="nav-resume" href="../assets/resume.pdf?v=17a6b9e03f5a" target="_blank" rel="noopener">Resume</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+        </button>
+        <button class="icon-btn nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="detail">
+    <a class="back-link" href="../index.html#experience">&larr; Back to experience</a>
+    <p class="hero-kicker">Undergraduate Research · Oct 2026 – Present · Early stage</p>
+    <h1>Multi-Robot Coordination Research</h1>
+    <p class="detail-sub">Undergraduate research assistant with Prof. Sanjeev Bedi at the University of Waterloo, exploring how independently navigating robots can coordinate when they encounter one another.</p>
+    <ul class="tags">
+      <li>TETRIX Robots</li>
+      <li>Multi-Robot Systems</li>
+      <li>Visual Detection</li>
+      <li>Camera Multiplexing</li>
+      <li>Path Coordination</li>
+    </ul>
+
+    <h2>The research goal</h2>
+    <p>
+      The term's goal is for <strong>two TETRIX robots</strong> to start at separate points on a grid
+      and navigate toward their own selected destinations, initially without knowing that the other
+      robot is operating. Once they come into view of one another, they should stop, communicate,
+      and determine whether their intended paths conflict.
+    </p>
+
+    <h2>Planned sensing</h2>
+    <p>
+      The proposed setup uses <strong>4–6 cameras per robot</strong> to work toward
+      <strong>360-degree visual coverage</strong>. A <strong>multiplexer</strong> will route multiple
+      camera inputs through a single output. The camera arrangement and sensing behavior are part
+      of the research scope; coverage and integration results are still to be established.
+    </p>
+
+    <h2>Target encounter behavior</h2>
+    <p>The intended sequence is:</p>
+    <ol>
+      <li><strong>Navigate independently:</strong> each robot follows a route toward its own destination.</li>
+      <li><strong>Detect and stop:</strong> visual detection of the other robot triggers a pause.</li>
+      <li><strong>Communicate:</strong> the robots exchange the information needed to check their intended paths for conflicts.</li>
+      <li><strong>Coordinate:</strong> resolve a potential conflict before continuing toward their destinations.</li>
+    </ol>
+
+    <h2>Current stage</h2>
+    <p>
+      I joined the research in <strong>October 2026</strong>. Independent navigation, visual encounter
+      detection, and path coordination are the term's research objectives. This page will document
+      hardware integration and experimental results as the work progresses.
+    </p>
+    <p>
+      Related earlier work: the <a href="../projects/fleet-robotics.html">Toyota Innovation Challenge
+      autonomous-fleet platform</a> from my Summer 2026 IDEAS Clinic term.
+    </p>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>&copy; 2026 Syed Fuzail Farhan</span>
+      <div class="footer-links">
+        <a href="mailto:sffarhan@uwaterloo.ca">Email</a>
+        <a href="https://www.linkedin.com/in/fuzail-farhan/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="../assets/resume.pdf?v=17a6b9e03f5a" target="_blank" rel="noopener">Resume</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

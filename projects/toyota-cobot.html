@@ -28,7 +28,7 @@
         <a href="../index.html#projects">Projects</a>
         <a href="../index.html#case-studies">Case Studies</a>
         <a href="../index.html#contact">Contact</a>
-        <a class="nav-resume" href="../assets/resume.pdf?v=32f9b2efc405" target="_blank" rel="noopener">Resume</a>
+        <a class="nav-resume" href="../assets/resume.pdf?v=17a6b9e03f5a" target="_blank" rel="noopener">Resume</a>
       </nav>
       <div class="nav-actions">
         <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode">
@@ -46,7 +46,7 @@
     <a class="back-link" href="../index.html#projects">&larr; Back to projects</a>
     <p class="hero-kicker">Project · IDEAS Clinic × Toyota · Delivered</p>
     <h1>Toyota Challenge — Collaborative Robotics</h1>
-    <p class="detail-sub">A collaborative-robotics workshop designed with Toyota: a vision-guided pick-and-place cell that stops the moment a human hand enters the workspace.</p>
+    <p class="detail-sub">A collaborative-robotics workshop designed with Toyota: a vision-guided pick-and-place cell with a prototype hand-detection motion pause.</p>
     <ul class="tags">
       <li>OpenCV</li>
       <li>YOLO</li>
@@ -54,7 +54,7 @@
       <li>Orbbec Depth Camera</li>
       <li>Python</li>
       <li>Cobots</li>
-      <li>HRI Safety</li>
+      <li>Hand Detection</li>
       <li>Computer Vision</li>
     </ul>
 
@@ -87,7 +87,7 @@
     <ul>
       <li>An <strong>OpenCV</strong> pipeline segments the workspace by colour, identifies target objects, and computes pick coordinates. The baseline we hand students detects red objects, picks them up, and drops them into a round container.</li>
       <li>A <strong>Dobot robotic arm</strong> picks each matching object and places it into a tray, fully autonomously.</li>
-      <li>A safety layer continuously watches the work zone: if a <strong>human hand is detected inside it, the arm pauses immediately</strong> and resumes only once the hand is clear of the zone — the same interlock philosophy used in industrial cobot cells.</li>
+      <li>A prototype <strong>YOLO hand-detection condition</strong> pauses arm motion while a hand is detected in the work zone.</li>
     </ul>
 
     <h2>Solving our own challenge</h2>
@@ -99,7 +99,7 @@
       <li><strong>Retargeting by colour</strong> — changing which colour the arm hunts for, which sounds trivial until lighting shifts and your "red" threshold quietly stops matching red.</li>
       <li><strong>Multiple objects</strong> — deciding what to pick first and how to keep the vision pipeline stable while the scene changes under it.</li>
       <li><strong>Multiple drop-off points</strong> — sorting rather than just clearing, so the arm has to route each object somewhere specific.</li>
-      <li><strong>Hand detection with YOLO</strong> — I added a <strong>YOLO</strong> model on top of the colour pipeline so the safety interlock keys on an actual detected hand rather than a colour blob. If a hand enters the working envelope during a task, the arm stops dead and stays stopped until the zone is clear.</li>
+      <li><strong>Hand detection with YOLO</strong> — I added a <strong>YOLO</strong> model alongside the colour pipeline and prototyped a condition that pauses arm motion while a hand is detected in the work area.</li>
       <li><strong>Irregular parts</strong> — moving from flat velcro markers to 3D-printed car parts like brake calipers, where the shape gives you no clean centroid to grab.</li>
     </ul>
 
@@ -125,7 +125,7 @@
       <div class="footer-links">
         <a href="mailto:sffarhan@uwaterloo.ca">Email</a>
         <a href="https://www.linkedin.com/in/fuzail-farhan/" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="../assets/resume.pdf?v=32f9b2efc405" target="_blank" rel="noopener">Resume</a>
+        <a href="../assets/resume.pdf?v=17a6b9e03f5a" target="_blank" rel="noopener">Resume</a>
       </div>
     </div>
   </footer>

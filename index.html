@@ -4,20 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Syed Fuzail Farhan — Mechatronics Engineering</title>
-  <meta name="description" content="Portfolio of Syed Fuzail Farhan, Mechatronics Engineering student at the University of Waterloo — firmware, mechatronic systems, and simulation-validated hardware.">
+  <meta name="description" content="Portfolio of Syed Fuzail Farhan, Mechatronics Engineering student at the University of Waterloo: robots, firmware and simulations, checked against the hardware.">
   <meta property="og:title" content="Syed Fuzail Farhan — Mechatronics Engineering">
-  <meta property="og:description" content="Firmware, mechatronic systems, and simulation-validated hardware. Projects: collaborative and fleet robotics for the Toyota Innovation Challenge, a campus sensor-data backend, an EMG-operated claw, and a desktop wind tunnel + CFD.">
+  <meta property="og:description" content="Two-robot arena research with Prof. Sanjeev Bedi, a Stewart platform ball balancer, Toyota Innovation Challenge robotics, a campus sensor-data backend and an EMG-operated claw.">
   <meta property="og:type" content="website">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23141414'/%3E%3Ctext x='50' y='68' font-size='48' font-family='Arial, sans-serif' font-weight='bold' fill='white' text-anchor='middle'%3ESF%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231c1a17'/%3E%3Ctext x='50' y='66' font-size='44' font-family='Arial, sans-serif' font-weight='bold' fill='%23faf8f4' text-anchor='middle'%3ESF%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script>
-    // Apply saved theme before first paint to avoid flash
+    // Apply the saved theme before first paint
     (function () {
-      const saved = localStorage.getItem("theme");
-      if (saved) document.documentElement.dataset.theme = saved;
+      try {
+        const saved = localStorage.getItem("theme");
+        if (saved) document.documentElement.dataset.theme = saved;
+      } catch (e) {}
     })();
   </script>
 </head>
@@ -30,17 +32,17 @@
         <a href="#about">About</a>
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
-        <a href="#case-studies">Case Studies</a>
+        <a href="#case-studies">Case studies</a>
         <a href="#contact">Contact</a>
         <a class="nav-resume" href="assets/resume.pdf?v=17a6b9e03f5a" target="_blank" rel="noopener">Resume</a>
       </nav>
       <div class="nav-actions">
         <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode">
-          <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-          <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
         </button>
         <button class="icon-btn nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
         </button>
       </div>
     </div>
@@ -48,63 +50,55 @@
 
   <main>
     <!-- ============ HERO ============ -->
-    <section class="hero-wrap">
-      <div class="hero-bg" aria-hidden="true">
-        <div class="hero-grid"></div>
-        <span class="beam beam-1"></span>
-        <span class="beam beam-2"></span>
-        <span class="beam beam-3"></span>
+    <section class="hero container">
+      <div class="hero-text">
+        <p class="hero-kicker">The Fuzzy Museum · Mechatronics Engineering, University of Waterloo</p>
+        <h1>Robots, firmware and simulations, checked against the hardware</h1>
+        <p class="hero-sub">
+          I write firmware for STM32 and ESP32, build mechatronic systems from CAD to machined part,
+          and compare every model with measurements. Right now that means two-robot research with
+          Prof. Sanjeev Bedi and rover communications with the UW Robotics Team.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#projects">See projects</a>
+          <a class="btn btn-ghost" href="assets/resume.pdf?v=17a6b9e03f5a" target="_blank" rel="noopener">Resume (PDF)</a>
+        </div>
       </div>
-      <div class="hero container">
-      <p class="hero-kicker" data-hero>Mechatronics Engineering · University of Waterloo</p>
-      <h1 data-hero><span class="shimmer">The Fuzzy Museum</span></h1>
-      <p class="hero-rotator" data-hero>
-        Currently building
-        <span class="rotator" aria-live="polite">
-          <span class="rotator-item">an LLM-embodied desk robot</span>
-          <span class="rotator-item">Mars-rover firmware</span>
-          <span class="rotator-item">low-cost prosthetics</span>
-          <span class="rotator-item">a fleet of maze solvers</span>
-        </span>
-      </p>
-      <p class="hero-sub" data-hero>
-        Firmware on STM32 and ESP32, mechatronic systems from CAD to machined part,
-        and simulations I validate with real experiments.
-      </p>
-      <div class="hero-cta" data-hero>
-        <a class="btn btn-primary" href="#projects">View Projects</a>
-        <a class="btn btn-ghost" href="assets/resume.pdf?v=17a6b9e03f5a" target="_blank" rel="noopener">Download Resume</a>
-      </div>
-      <div class="hero-social" data-hero>
-        <a href="mailto:sffarhan@uwaterloo.ca" aria-label="Email">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/in/fuzail-farhan/" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
-        </a>
-        <a href="https://github.com/fuzail127" target="_blank" rel="noopener" aria-label="GitHub">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.91c.58.11.79-.25.79-.55v-2.17c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12v3.14c0 .3.2.66.8.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
-        </a>
-      </div>
-      </div>
-    </section>
 
-    <!-- ============ TECH MARQUEE ============ -->
-    <section class="marquee" aria-label="Tools and technologies I work with">
-      <div class="marquee-track">
-        <ul class="marquee-list">
-          <li>STM32</li><li>ESP32</li><li>Embedded C</li><li>Python</li>
-          <li>FPGA / Quartus</li><li>OpenCV</li><li>SolidWorks</li><li>ANSYS</li>
-          <li>FEA / CFD</li><li>PlatformIO</li><li>CNC Machining</li><li>GD&amp;T</li>
-          <li>3D Printing</li><li>Django</li>
-        </ul>
-        <ul class="marquee-list" aria-hidden="true">
-          <li>STM32</li><li>ESP32</li><li>Embedded C</li><li>Python</li>
-          <li>FPGA / Quartus</li><li>OpenCV</li><li>SolidWorks</li><li>ANSYS</li>
-          <li>FEA / CFD</li><li>PlatformIO</li><li>CNC Machining</li><li>GD&amp;T</li>
-          <li>3D Printing</li><li>Django</li>
-        </ul>
-      </div>
+      <figure class="plot">
+        <div class="plot-frame">
+          <svg viewBox="-165 -165 330 330" role="img" aria-label="Measured path of a ping-pong ball on a 300 mm plate, looping around a diamond of four target waypoints 80 mm from the centre">
+            <defs>
+              <clipPath id="plate-clip"><circle r="150"/></clipPath>
+            </defs>
+            <circle class="plate" r="150"/>
+            <g class="grid" clip-path="url(#plate-clip)">
+              <line x1="-100" y1="-150" x2="-100" y2="150"/>
+              <line x1="-50" y1="-150" x2="-50" y2="150"/>
+              <line x1="0" y1="-150" x2="0" y2="150"/>
+              <line x1="50" y1="-150" x2="50" y2="150"/>
+              <line x1="100" y1="-150" x2="100" y2="150"/>
+              <line x1="-150" y1="-100" x2="150" y2="-100"/>
+              <line x1="-150" y1="-50" x2="150" y2="-50"/>
+              <line x1="-150" y1="0" x2="150" y2="0"/>
+              <line x1="-150" y1="50" x2="150" y2="50"/>
+              <line x1="-150" y1="100" x2="150" y2="100"/>
+            </g>
+            <polygon class="diamond" points="80,0 0,-80 -80,0 0,80"/>
+            <circle class="target" cx="80" cy="0" r="25"/>
+            <circle class="target" cx="0" cy="-80" r="25"/>
+            <circle class="target" cx="-80" cy="0" r="25"/>
+            <circle class="target" cx="0" cy="80" r="25"/>
+            <path class="trace" pathLength="1" d="M-10.2 -114.1 L-20.4 -110.2 L-29.0 -105.2 L-35.7 -99.0 L-40.2 -91.8 L-43.0 -83.7 L-44.3 -75.5 L-43.6 -67.1 L-41.2 -59.4 L-37.6 -51.7 L-33.2 -44.4 L-27.8 -38.8 L-22.7 -32.8 L-16.4 -30.1 L-9.8 -28.1 L-3.7 -28.1 L2.9 -29.6 L9.7 -32.5 L15.9 -37.5 L21.6 -43.3 L26.6 -50.7 L30.7 -58.5 L33.8 -66.6 L35.9 -75.4 L36.2 -84.5 L35.8 -93.2 L33.6 -100.9 L30.6 -107.5 L26.3 -112.8 L21.1 -117.0 L15.1 -120.2 L8.5 -122.0 L1.3 -122.8 L-5.8 -122.0 L-12.6 -119.7 L-19.5 -117.0 L-24.8 -112.3 L-29.2 -107.8 L-32.3 -102.7 L-33.9 -97.4 L-34.1 -91.7 L-32.8 -86.2 L-29.1 -81.4 L-25.0 -76.3 L-20.4 -72.0 L-13.2 -69.6 L-6.4 -67.6 L-0.1 -65.9 L6.0 -66.0 L10.6 -66.1 L14.0 -67.4 L15.9 -68.4 L15.6 -71.0 L14.1 -73.7 L10.9 -76.8 L7.0 -78.7 L1.5 -81.0 L-4.6 -82.2 L-11.6 -82.4 L-18.9 -82.2 L-25.4 -80.1 L-32.4 -77.2 L-39.4 -73.1 L-45.5 -68.7 L-52.2 -63.4 L-58.8 -58.6 L-65.5 -52.8 L-71.9 -46.0 L-78.5 -38.5 L-84.8 -29.6 L-90.8 -21.1 L-96.0 -12.3 L-100.5 -2.9 L-103.1 5.9 L-104.2 15.7 L-103.9 24.8 L-101.9 33.8 L-97.6 43.7 L-92.0 53.3 L-86.2 62.9 L-77.8 73.2 L-70.0 83.0 L-61.1 91.1 L-50.7 99.0 L-40.5 105.4 L-30.4 109.9 L-21.1 114.1 L-12.5 114.2 L-3.6 114.5 L5.6 113.3 L14.1 109.8 L22.4 107.1 L30.5 103.5 L37.1 97.7 L41.8 93.6 L46.5 84.1 L48.3 77.7 L50.6 72.2 L51.5 66.9 L51.3 63.6 L49.9 59.4 L46.4 57.1 L42.1 55.7 L35.9 55.0 L29.9 55.2 L21.3 57.1 L13.7 58.5 L6.8 62.1 L-0.4 66.3 L-6.5 70.4 L-11.7 74.3 L-14.1 79.5 L-13.6 82.7 L-12.2 86.6 L-8.6 89.8 L-1.8 92.3 L5.0 95.8 L13.6 97.2 L24.0 97.7 L34.0 97.4 L43.8 96.4 L53.4 93.6 L60.9 90.7 L69.1 84.2 L75.3 76.7 L81.5 68.8 L87.9 59.4 L92.8 50.6 L97.0 40.2 L98.9 27.6 L101.6 17.1 L101.6 6.9 L101.3 -2.9 L98.4 -10.6 L94.0 -16.5 L88.0 -23.6 L80.5 -28.0 L71.0 -32.1 L60.3 -35.5 L49.5 -36.2 L36.9 -37.8 L25.5 -36.1 L13.5 -34.5 L2.8 -32.3 L-6.8 -28.2 L-15.4 -23.8 L-22.0 -19.3 L-27.2 -13.7 L-31.4 -7.8 L-34.0 -0.6 L-35.6 6.4 L-35.8 14.1 L-35.7 21.4 L-33.5 28.6 L-30.5 35.8 L-25.6 41.0 L-20.6 45.7 L-15.9 48.1 L-11.0 49.6 L-5.7 49.0 L-1.5 46.8 L2.2 42.7 L6.7 38.4 L9.7 31.1 L12.2 24.8 L14.2 18.5 L15.5 11.1 L16.3 4.2 L16.3 -2.0 L15.6 -8.8 L15.0 -13.2 L13.5 -17.5 L12.0 -19.5 L9.2 -20.9 L7.6 -20.5 L6.1 -19.5 L4.9 -17.8 L4.5 -15.3 L4.9 -11.6 L6.3 -7.6 L8.5 -3.1 L11.6 1.3 L14.7 5.7 L17.2 9.6 L20.1 12.1 L25.1 14.4 L29.0 16.9 L32.3 18.9 L36.5 20.1 L41.9 22.1 L45.9 22.5 L51.5 24.4 L56.7 24.8 L62.0 23.8 L67.8 24.5 L74.5 23.6 L81.1 23.5 L88.7 21.4 L95.8 18.5 L102.7 14.6 L107.8 9.4 L113.5 3.3 L116.4 -4.2 L119.4 -12.8 L120.2 -20.8 L118.5 -30.1 L115.5 -41.3 L111.6 -52.0 L106.1 -61.9 L99.4 -73.7 L91.1 -87.0 L81.6 -100.0 L71.1 -111.1 L60.2 -122.1 L49.2 -128.2 L38.5 -133.6 L27.1 -139.3 L17.3 -139.5 L6.6 -140.3 L-5.9 -140.2 L-17.1 -138.9 L-27.8 -134.9 L-38.7 -131.1 L-46.8 -124.9 L-54.2 -119.4 L-59.8 -111.1 L-62.5 -104.6 L-62.7 -99.6 L-61.7 -93.9 L-57.7 -87.9 L-52.1 -82.7 L-44.7 -77.4 L-36.5 -72.6 L-27.3 -67.9 L-16.9 -64.8 L-6.9 -62.3 L2.6 -60.8 L11.4 -61.9 L18.1 -63.0 L23.6 -64.3 L26.8 -67.2 L27.9 -70.2 L27.8 -73.3 L25.7 -76.9 L22.3 -80.9 L16.6 -84.5 L9.9 -87.5 L1.8 -90.6 L-6.9 -91.3 L-16.6 -91.5 L-26.5 -90.3 L-36.0 -88.7 L-45.4 -85.0 L-54.5 -80.1 L-62.4 -73.5 L-70.3 -65.8 L-77.8 -56.5 L-86.0 -47.0 L-93.1 -35.9 L-98.9 -24.3 L-104.1 -12.7 L-108.1 -1.7 L-109.9 9.0 L-110.8 18.1 L-110.3 26.5 L-108.8 34.8 L-105.7 41.5 L-102.1 47.9 L-97.1 52.6 L-90.8 56.5 L-84.4 59.6 L-77.9 61.3 L-71.4 61.9 L-64.8 62.2 L-59.0 60.6 L-53.4 58.3 L-48.8 55.6 L-45.1 50.9 L-42.8 46.6 L-41.9 42.4 L-42.0 36.8 L-43.6 30.9 L-45.0 25.5 L-48.5 19.0 L-52.5 12.5 L-57.0 7.0 L-63.1 1.8 L-69.8 -2.7 L-77.0 -7.5 L-82.7 -8.5 L-89.3 -9.3 L-94.1 -7.2 L-99.8 -2.4 L-102.4 4.2 L-105.0 11.7 L-106.0 20.6 L-105.3 28.8 L-103.1 37.8 L-99.6 47.4 L-94.1 56.1 L-87.5 64.9 L-80.0 73.4 L-70.6 80.9 L-61.3 87.4 L-50.7 92.7 L-39.6 97.6 L-29.0 99.1 L-19.0 100.7 L-8.5 99.7 L1.1 97.5 L10.7 93.6 L18.8 89.1 L28.9 82.3 L37.6 75.2 L45.3 65.8 L52.2 57.5 L58.6 47.1 L62.6 38.2 L65.9 29.2 L68.3 20.5 L70.0 14.7 L69.5 5.9 L67.2 -1.8 L64.2 -7.6 L59.0 -14.7 L53.0 -20.5 L45.9 -24.6 L38.1 -27.7 L29.7 -29.6 L21.6 -30.5 L13.7 -28.8 L6.4 -27.0 L-0.2 -24.0 L-5.8 -19.4 L-10.1 -13.8 L-14.4 -8.5 L-15.7 -1.7 L-16.4 6.7 L-14.4 14.1 L-11.1 22.8 L-5.1 31.2 L2.4 38.2 L8.9 45.8 L17.1 50.6 L25.4 54.7 L33.9 58.5 L43.2 59.4 L52.7 59.7 L63.3 58.6 L73.0 56.9 L83.0 52.5 L92.1 48.2 L101.4 40.8 L109.5 35.4 L115.8 29.5 L119.7 22.7 L123.7 15.5 L126.7 8.1 L124.0 5.9 L118.5 2.9 L109.0 2.4 L98.2 2.6 L86.7 3.0 L76.6 3.4 L65.6 3.6 L55.9 5.0 L47.7 3.6 L40.1 3.7 L33.9 2.5 L30.2 1.3 L28.1 -1.7 L26.6 -4.1 L26.5 -6.8 L27.2 -10.9 L28.5 -15.4 L29.8 -20.4 L32.0 -27.6 L33.3 -34.3 L35.1 -42.7 L36.9 -51.2 L38.3 -60.1 L40.0 -68.5 L40.7 -77.9 L41.3 -85.7 L41.4 -93.6 L41.2 -99.8 L40.4 -104.8 L38.5 -110.2 L36.0 -115.0 L32.6 -118.6 L29.3 -120.8 L25.1 -122.1 L20.5 -123.6 L16.2 -124.5 L11.5 -124.3 L7.0 -122.5 L2.3 -121.5 L-3.7 -119.5 L-11.1 -119.5 L-16.5 -116.4 L-23.0 -113.8 L-28.2 -110.6 L-33.1 -107.1 L-36.7 -103.4 L-39.3 -100.3 L-40.9 -96.6 L-41.5 -93.6 L-40.1 -90.9 L-37.4 -88.4 L-33.6 -87.1 L-29.6 -85.6 L-25.3 -84.1 L-20.3 -84.3 L-15.6 -85.3 L-10.5 -87.6 L-6.2 -89.3 L-3.2 -92.5 L-0.9 -95.6 L0.1 -97.9 L-0.7 -100.1 L-1.7 -101.9 L-4.4 -102.8 L-8.2 -104.4 L-12.6 -103.8 L-17.8 -103.5 L-23.7 -102.5 L-29.5 -99.8 L-35.9 -97.0 L-41.7 -93.1 L-47.9 -88.2 L-53.1 -82.3 L-59.0 -75.9 L-64.4 -68.1 L-69.2 -59.8 L-73.7 -50.6 L-78.2 -41.0 L-82.7 -30.5 L-86.1 -19.5 L-90.0 -9.2 L-93.5 1.5 L-96.3 11.3 L-96.7 21.1 L-96.0 30.1 L-95.6 39.8 L-93.5 49.5 L-91.0 60.7 L-88.8 72.2 L-85.0 83.0 L-79.7 93.8 L-73.3 104.5 L-66.3 114.2"/>
+            <path class="origin" d="M-5 0H5M0 -5V5"/>
+            <text class="axis-label" x="-162" y="161">grid 50 mm · plate r 150 mm</text>
+          </svg>
+        </div>
+        <figcaption>
+          <span>Measured ball path, 30 s of a 171 s run · 12 Nov 2026</span>
+          <a href="projects/stewart-platform.html">Stewart platform ball balancer</a>
+        </figcaption>
+      </figure>
     </section>
 
     <!-- ============ ABOUT + SKILLS ============ -->
@@ -114,19 +108,19 @@
         <div class="about-text">
           <p>
             I'm a Mechatronics Engineering student at the University of Waterloo who likes
-            projects that need a soldering iron, a 3D printer, and a debugger all in the
-            same afternoon. I've configured embedded firmware on STM32 and ESP32,
-            automated quantum-chemistry pipelines in Python, and helped develop FEA/CFD
-            and microcontroller workshops for engineering students.
+            projects that need a soldering iron, a 3D printer and a debugger in the same
+            afternoon. I've configured embedded firmware on STM32 and ESP32, automated
+            quantum-chemistry pipelines in Python, and helped run FEA/CFD and microcontroller
+            workshops for engineering students.
           </p>
           <p>
             In my last co-op I designed collaborative- and fleet-robotics challenges with a
             Dobot arm, OpenCV and a floor full of TETRIX robots, and built the backend for a
             campus environmental sensor platform. I'm now an
             <a href="experience/bedi-research.html">undergraduate research assistant with Prof. Sanjeev Bedi</a>,
-            exploring how two independently navigating TETRIX robots can detect one another
-            and coordinate around path conflicts. With the
-            <a href="experience/uwrt.html">UW Robotics Team</a>, I've established micro-ROS
+            building a <a href="projects/two-robot-arena.html">two-robot arena</a> where TETRIX robots
+            with Raspberry Pi cameras find objects, localize from markers and stay out of each other's way.
+            With the <a href="experience/uwrt.html">UW Robotics Team</a>, I've established micro-ROS
             messaging over USART3 and am working on the rover's Ethernet communication interface.
           </p>
         </div>
@@ -134,19 +128,19 @@
           <div class="skill-group">
             <h3>Languages</h3>
             <ul class="tags">
-              <li>C / C++</li><li>Embedded C</li><li>Python</li><li>Swift</li><li>VHDL</li><li>PLC</li>
+              <li>C / C++</li><li>Embedded C</li><li>Python</li><li>MATLAB</li><li>Swift</li><li>VHDL</li><li>PLC</li>
             </ul>
           </div>
           <div class="skill-group">
-            <h3>Hardware &amp; Design</h3>
+            <h3>Hardware and design</h3>
             <ul class="tags">
-              <li>3D Printing</li><li>CNC Machining</li><li>GD&amp;T</li><li>FEA / CFD</li><li>Soldering</li><li>Engineering Drawings</li>
+              <li>3D printing</li><li>CNC machining</li><li>GD&amp;T</li><li>FEA / CFD</li><li>Soldering</li><li>Engineering drawings</li>
             </ul>
           </div>
           <div class="skill-group">
-            <h3>Tools &amp; Platforms</h3>
+            <h3>Tools and platforms</h3>
             <ul class="tags">
-              <li>STM32</li><li>ESP32</li><li>FreeRTOS</li><li>micro-ROS</li><li>LwIP</li><li>FPGA / Quartus</li><li>Arduino</li><li>SolidWorks</li><li>AutoCAD</li><li>ANSYS</li><li>Git</li><li>Django</li><li>Matlab</li>
+              <li>STM32</li><li>ESP32</li><li>Raspberry Pi</li><li>Arduino</li><li>FreeRTOS</li><li>micro-ROS</li><li>LwIP</li><li>OpenCV</li><li>YOLO</li><li>FPGA / Quartus</li><li>SolidWorks</li><li>AutoCAD</li><li>ANSYS</li><li>Git</li><li>Django</li>
             </ul>
           </div>
         </div>
@@ -159,27 +153,28 @@
       <div class="timeline">
 
         <article class="timeline-item">
-          <div class="timeline-meta">Oct 2026 – Present</div>
+          <div class="timeline-meta">Oct 2026 – Present<span class="status is-live">Current</span></div>
           <div class="timeline-body">
             <h3>Undergraduate Research Assistant · University of Waterloo</h3>
             <ul>
-              <li>Beginning research under <strong>Prof. Sanjeev Bedi</strong> on two TETRIX robots navigating independently on a grid. The goal is for the robots to stop on visual detection, communicate, and resolve potential path conflicts.</li>
-              <li>Planned sensing uses <strong>4–6 cameras per robot</strong> for intended 360-degree coverage.</li>
+              <li>Building a <a href="projects/two-robot-arena.html">two-robot arena</a> under <strong>Prof. Sanjeev Bedi</strong>: TETRIX PRIZM robots with <strong>Raspberry Pi</strong> webcams, <strong>YOLO</strong> running on a computer over Wi-Fi, and position from <strong>ArUco</strong> markers at the arena's corners.</li>
+              <li>First complete task on the real robots (15 Nov 2026): a fetch request finished in <strong>57 s</strong>, with the second robot moved out of the carrying path first. Drive distance calibration and one robot's camera link are still being fixed.</li>
+              <li>Benchmarked on-Pi against offloaded detection (OpenCV colour detection, then YOLO26 nano) over Wi-Fi and Ethernet before choosing where vision runs.</li>
             </ul>
-            <a class="read-more" href="experience/bedi-research.html">Read more →</a>
+            <a class="read-more" href="experience/bedi-research.html">Read more</a>
           </div>
         </article>
 
         <article class="timeline-item">
-          <div class="timeline-meta">Jun 2026 – Present</div>
+          <div class="timeline-meta">Jun 2026 – Present<span class="status is-live">Current</span></div>
           <div class="timeline-body">
             <h3>Firmware Developer · UW Robotics Team (Mars Rover)</h3>
             <ul>
               <li>Established <strong>micro-ROS message exchange</strong> between an STM32 NUCLEO-F439ZI and a host Agent over USB/USART3, using FreeRTOS and DMA-backed serial transport.</li>
-              <li>Configured LwIP/UDP, RMII Ethernet, and static IP addressing; verified basic connectivity from Windows and Ubuntu/WSL. Currently investigating missing Agent traffic using CubeIDE breakpoints, DMA status registers, and tcpdump.</li>
+              <li>Configured LwIP/UDP, RMII Ethernet and static IP addressing; verified basic connectivity from Windows and Ubuntu/WSL. Currently investigating missing Agent traffic using CubeIDE breakpoints, DMA status registers and tcpdump.</li>
               <li>Contributing to the STM32 interface for a rover with two NVIDIA Jetsons, aiming to move time-sensitive I/O and preprocessing off the Ubuntu-based arm and rover computers.</li>
             </ul>
-            <a class="read-more" href="experience/uwrt.html">Read more →</a>
+            <a class="read-more" href="experience/uwrt.html">Read more</a>
           </div>
         </article>
 
@@ -188,12 +183,12 @@
           <div class="timeline-body">
             <h3>Research Assistant · IDEAS Clinic, University of Waterloo</h3>
             <ul>
-              <li>Designed and tested two sub-problems for the Toyota Innovation Challenge: a <a href="projects/toyota-cobot.html">collaborative-robotics cell</a> (Dobot arm + OpenCV + a prototype YOLO hand-detection motion pause) and an <a href="projects/fleet-robotics.html">autonomous-fleet challenge</a> coordinating multiple TETRIX robots over TCP. Worked through quick R&amp;D iterations to meet project deadlines.</li>
+              <li>Designed and tested two sub-problems for the Toyota Innovation Challenge: a <a href="projects/toyota-cobot.html">collaborative-robotics cell</a> (Dobot arm, OpenCV and a prototype YOLO hand-detection motion pause) and an <a href="projects/fleet-robotics.html">autonomous-fleet challenge</a> coordinating multiple TETRIX robots over TCP.</li>
               <li>Reduced contact-stress error against AGMA calculations from <strong>76.2% to 5.13%</strong> by investigating mesh convergence and rebuilding an ANSYS Mechanical contact model for a <a href="case-studies/spur-gear.html">spur-gear study</a>.</li>
-              <li>Built the sensor-data backend for <a href="https://datahub.uwaterloo.ca" target="_blank" rel="noopener">datahub.uwaterloo.ca</a>: writing an API for sensors that don't have one — REST ingestion, URL manipulation, request-level scraping, and automated parsing of sensors that only report by email.</li>
-              <li>Prototyped the "GrowBot", an LLM-embodied robot, with the creator of <em>I gave ChatGPT a body</em> — now continued as a personal build.</li>
+              <li>Built the sensor-data backend for <a href="https://datahub.uwaterloo.ca" target="_blank" rel="noopener">datahub.uwaterloo.ca</a>: an API for sensors that don't have one, through REST ingestion, URL manipulation, request-level scraping and automated parsing of sensors that only report by email.</li>
+              <li>Prototyped the GrowBot, an LLM-embodied robot, with the creator of <q>I gave ChatGPT a body</q>, now continued as a personal build.</li>
             </ul>
-            <a class="read-more" href="experience/ideas-clinic-2026.html">Read more →</a>
+            <a class="read-more" href="experience/ideas-clinic-2026.html">Read more</a>
           </div>
         </article>
 
@@ -202,22 +197,11 @@
           <div class="timeline-body">
             <h3>Research Assistant · IDEAS Clinic, University of Waterloo</h3>
             <ul>
-              <li>Co-designed a 3-day ANSYS FEA/CFD workshop for 70+ students and a 4-day MCU + FPGA workshop for 60+, covering PWM, serial communication, and circuit debugging.</li>
-              <li>Built industry-backed simulation case studies with ANSYS (<a href="case-studies/heat-exchanger.html">heat exchangers</a>, schlieren imaging, shoulder implant, hands-free crutch), fabricating physical test models that matched simulation within ~80%.</li>
+              <li>Co-designed a 3-day ANSYS FEA/CFD workshop for 70+ students and a 4-day MCU and FPGA workshop for 60+, covering PWM, serial communication and circuit debugging.</li>
+              <li>Built industry-backed simulation case studies with ANSYS (<a href="case-studies/heat-exchanger.html">heat exchangers</a>, schlieren imaging, shoulder implant, hands-free crutch), fabricating physical test models that matched simulation within about 80%.</li>
               <li>Supported a PhD researcher's defense by simulating shoulder-replacement surgery with FEA.</li>
             </ul>
-            <a class="read-more" href="experience/ideas-clinic-2025.html">Read more →</a>
-          </div>
-        </article>
-
-        <article class="timeline-item">
-          <div class="timeline-meta">Sept 2024 – Dec 2024</div>
-          <div class="timeline-body">
-            <h3>Firmware Engineer · Electrium Design Team</h3>
-            <ul>
-              <li>Contributed to firmware/configuration for an ESP32-based electronic speed controller project, setting up PWM on an ESP and configuring DRV8353 gate-driver settings.</li>
-            </ul>
-            <a class="read-more" href="experience/electrium.html">Read more →</a>
+            <a class="read-more" href="experience/ideas-clinic-2025.html">Read more</a>
           </div>
         </article>
 
@@ -229,7 +213,18 @@
               <li>Built Python pipelines that fully automated UV-Vis and NMR spectra generation, letting researchers process sample batches unattended.</li>
               <li>Extended an in-house quantum chemistry codebase to handle end-to-end spectroscopy tasks and laid the groundwork for Raman spectra automation.</li>
             </ul>
-            <a class="read-more" href="experience/formulanano.html">Read more →</a>
+            <a class="read-more" href="experience/formulanano.html">Read more</a>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-meta">Sept 2024 – Dec 2024</div>
+          <div class="timeline-body">
+            <h3>Firmware Engineer · Electrium Design Team</h3>
+            <ul>
+              <li>Contributed to firmware and configuration for an ESP32-based electronic speed controller project, setting up PWM on an ESP and configuring DRV8353 gate-driver settings.</li>
+            </ul>
+            <a class="read-more" href="experience/electrium.html">Read more</a>
           </div>
         </article>
 
@@ -238,10 +233,10 @@
           <div class="timeline-body">
             <h3>Software Engineering Intern · GrazeAI</h3>
             <ul>
-              <li>Engineered a reusable Python scraper (REST APIs + regex) filtering 600,000+ clinical trials by custom criteria — cutting manual trial identification from days to minutes.</li>
+              <li>Engineered a reusable Python scraper (REST APIs and regex) filtering 600,000+ clinical trials by custom criteria, cutting manual trial identification from days to minutes.</li>
               <li>Led a team of 4 building generalized data-extraction systems and reduced execution time of key tasks by 40%.</li>
             </ul>
-            <a class="read-more" href="experience/grazeai.html">Read more →</a>
+            <a class="read-more" href="experience/grazeai.html">Read more</a>
           </div>
         </article>
 
@@ -250,7 +245,7 @@
           <div class="timeline-body">
             <h3>Electrical Engineering Intern · Xervon</h3>
             <ul>
-              <li>Supported the replacement of bulk-oil circuit breakers with dead-tank breakers — validating and updating circuit drawings and coordinating scope with vendors.</li>
+              <li>Supported the replacement of bulk-oil circuit breakers with dead-tank breakers, validating and updating circuit drawings and coordinating scope with vendors.</li>
             </ul>
           </div>
         </article>
@@ -263,26 +258,98 @@
       <h2 class="section-title"><span class="section-num">03</span> Projects</h2>
       <div class="projects-grid">
 
+        <article class="card card-wide">
+          <div class="card-media arena-map">
+            <svg viewBox="-12 -12 224 236" role="img" aria-label="Plan of the 200 by 200 cm arena: eight markers near the corners, a dashed virtual wall 20 cm inside, and five named places, with the near-left corner marked where the bottle was delivered">
+              <rect class="wall" x="0" y="0" width="200" height="200"/>
+              <rect class="keepout" x="20" y="20" width="160" height="160"/>
+              <!-- eight ArUco markers, centres 10 cm from each corner -->
+              <rect class="marker" x="2.5" y="196" width="15" height="4"/>
+              <rect class="marker" x="0" y="182.5" width="4" height="15"/>
+              <rect class="marker" x="182.5" y="196" width="15" height="4"/>
+              <rect class="marker" x="196" y="182.5" width="4" height="15"/>
+              <rect class="marker" x="2.5" y="0" width="15" height="4"/>
+              <rect class="marker" x="0" y="2.5" width="4" height="15"/>
+              <rect class="marker" x="182.5" y="0" width="15" height="4"/>
+              <rect class="marker" x="196" y="2.5" width="4" height="15"/>
+              <!-- places, 40 cm in from the walls -->
+              <path class="place" d="M156 160h8M160 156v8"/>
+              <path class="place" d="M36 40h8M40 36v8"/>
+              <path class="place" d="M156 40h8M160 36v8"/>
+              <path class="place" d="M96 100h8M100 96v8"/>
+              <circle class="place-ring" cx="40" cy="160" r="8"/>
+              <path class="place-hit" d="M36 160h8M40 156v8"/>
+              <text x="52" y="163" class="hit">near_left</text>
+              <text x="152" y="163" text-anchor="end">near_right</text>
+              <text x="48" y="43">far_left</text>
+              <text x="152" y="43" text-anchor="end">far_right</text>
+              <text x="108" y="103">centre</text>
+              <text x="78" y="214">200 × 200 cm</text>
+            </svg>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <h3>Two-Robot Arena</h3>
+              <span class="status is-live">In progress</span>
+            </div>
+            <p class="spec">Research with Prof. Sanjeev Bedi · first task on the robots in 57 s · 15 Nov 2026</p>
+            <p>
+              Two TETRIX robots, each with a Raspberry Pi and webcams, share a marked arena. One typed
+              request, like <q>bring the bottle to the near-left corner</q>, becomes a plan: find the
+              object with YOLO, send the closer robot, move the other out of the way. Each robot works
+              out its position from the corner markers, and the safety checks run on the robot, not
+              over Wi-Fi.
+            </p>
+            <ul class="tags">
+              <li>Raspberry Pi</li><li>TETRIX PRIZM</li><li>Python</li><li>Arduino C++</li><li>YOLO</li><li>ArUco</li><li>Multi-robot</li>
+            </ul>
+            <a class="read-more" href="projects/two-robot-arena.html">Read more</a>
+          </div>
+        </article>
+
+        <article class="card card-wide">
+          <div class="card-media is-figure">
+            <img src="assets/img/stewart-planner-ideal.png" alt="Simulated ball path around a diamond of four waypoints: position control swings past each corner, the trajectory-planned path stops on each one" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <h3>Stewart Platform Ball Balancer</h3>
+              <span class="status">MTE 380 · Nov 2026</span>
+            </div>
+            <p class="spec">91 waypoints in 171 s · 27 mm mean overshoot, simulation predicted 27 mm</p>
+            <p>
+              A three-servo Stewart platform tilts a 300 mm plate while a camera tracks a ping-pong
+              ball. I measured the plant from our own logs, found the balancing loop had too much gain
+              for its 0.2 s of dead time and retuned it, then wrote a waypoint planner. In simulation
+              the planner removed overshoot; on the plate, the ball rarely stopped long enough for it
+              to run, and the page says why.
+            </p>
+            <ul class="tags">
+              <li>Python</li><li>OpenCV</li><li>Arduino</li><li>PID control</li><li>MATLAB</li><li>System identification</li>
+            </ul>
+            <a class="read-more" href="projects/stewart-platform.html">Read more</a>
+          </div>
+        </article>
+
         <article class="card">
           <div class="card-media">
             <img src="assets/img/toyota-cobot-1.jpg" alt="Dobot Magician arm with a gripper above a bench, a red 3D-printed brake caliper in a round tray" loading="lazy">
           </div>
           <div class="card-body">
             <div class="card-top">
-              <h3>Toyota Challenge — Collaborative Robotics</h3>
-              <span class="badge badge-done">Delivered</span>
+              <h3>Toyota Challenge: Collaborative Robotics</h3>
+              <span class="status">Delivered</span>
             </div>
             <p>
-              A collaborative-robotics challenge designed with Toyota. A Dobot Magician
-              arm and an Orbbec camera run an OpenCV pipeline that finds objects by
-              colour, picks them up, and sorts them into trays — with a YOLO hand
-              detector layered on top to prototype pausing arm motion while a hand
-              is detected in the work zone.
+              A collaborative-robotics challenge designed with Toyota. A Dobot Magician arm and an
+              Orbbec camera run an OpenCV pipeline that finds objects by colour, picks them up and
+              sorts them into trays, with a YOLO hand detector layered on top to prototype pausing
+              arm motion while a hand is in the work zone.
             </p>
             <ul class="tags">
-              <li>OpenCV</li><li>YOLO</li><li>Dobot Arm</li><li>Python</li><li>Hand Detection</li>
+              <li>OpenCV</li><li>YOLO</li><li>Dobot arm</li><li>Python</li><li>Hand detection</li>
             </ul>
-            <a class="read-more" href="projects/toyota-cobot.html">Read more →</a>
+            <a class="read-more" href="projects/toyota-cobot.html">Read more</a>
           </div>
         </article>
 
@@ -292,20 +359,19 @@
           </div>
           <div class="card-body">
             <div class="card-top">
-              <h3>Toyota Challenge — Autonomous Fleets</h3>
-              <span class="badge badge-done">Delivered</span>
+              <h3>Toyota Challenge: Autonomous Fleets</h3>
+              <span class="status">Delivered</span>
             </div>
             <p>
-              The second Toyota challenge I built: a fleet of TETRIX robots completing a
-              task together. A central arbiter talks to each robot over TCP in
-              newline-delimited JSON, a dashboard shows every robot's pose, state and
-              sensors at once, and the challenge ladders from "make one robot reliable"
-              up to collision-free coordination across the whole fleet.
+              The second Toyota challenge I built: a fleet of TETRIX robots completing a task together.
+              A central arbiter talks to each robot over TCP in newline-delimited JSON, a dashboard
+              shows every robot's pose, state and sensors at once, and the challenge ladders from
+              <q>make one robot reliable</q> up to collision-free coordination across the fleet.
             </p>
             <ul class="tags">
-              <li>Multi-Robot Systems</li><li>TETRIX</li><li>ESP32</li><li>TCP / JSON</li><li>Telemetry</li>
+              <li>Multi-robot</li><li>TETRIX</li><li>ESP32</li><li>TCP / JSON</li><li>Telemetry</li>
             </ul>
-            <a class="read-more" href="projects/fleet-robotics.html">Read more →</a>
+            <a class="read-more" href="projects/fleet-robotics.html">Read more</a>
           </div>
         </article>
 
@@ -315,20 +381,19 @@
           </div>
           <div class="card-body">
             <div class="card-top">
-              <h3>UW DataHub — Sensor Data Backend</h3>
-              <span class="badge badge-done">Live</span>
+              <h3>UW DataHub: Sensor Data Backend</h3>
+              <span class="status">Live</span>
             </div>
             <p>
-              Another co-op and I rebuilt a PhD researcher's campus sensor platform — I
-              took the backend. The hard part was the sensors with no API: I built one
-              for them anyway, through URL manipulation, replaying a portal's own
-              requests, and automated parsing of sensors that will only ever email you
-              their data. Live at datahub.uwaterloo.ca.
+              Another co-op and I rebuilt a PhD researcher's campus sensor platform, and I took the
+              backend. The hard part was the sensors with no API: I built one for them anyway, through
+              URL manipulation, replaying a portal's own requests, and automated parsing of sensors that
+              will only ever email you their data. Live at datahub.uwaterloo.ca.
             </p>
             <ul class="tags">
-              <li>Python</li><li>REST APIs</li><li>Web Scraping</li><li>Data Pipelines</li><li>Backend</li>
+              <li>Python</li><li>REST APIs</li><li>Web scraping</li><li>Data pipelines</li><li>Backend</li>
             </ul>
-            <a class="read-more" href="projects/datahub.html">Read more →</a>
+            <a class="read-more" href="projects/datahub.html">Read more</a>
           </div>
         </article>
 
@@ -340,18 +405,18 @@
           <div class="card-body">
             <div class="card-top">
               <h3>Maze-Solving Robot</h3>
-              <span class="badge badge-wip">Work in progress</span>
+              <span class="status is-live">In progress</span>
             </div>
             <p>
-              A mini maze solver built from cheap parts — ESP32, DRV8833 drivers, plain
-              DC motors, ultrasonic sensors for the walls. Then the goal moved: instead
-              of one robot solving a maze, I'm working toward a fleet of them solving it
-              together, splitting the map and sharing what each has already explored.
+              A mini maze solver built from cheap parts: ESP32, DRV8833 drivers, plain DC motors and
+              ultrasonic sensors for the walls. Then the goal moved: instead of one robot solving a
+              maze, I'm working toward a fleet of them solving it together, splitting the map and
+              sharing what each has already explored.
             </p>
             <ul class="tags">
-              <li>ESP32</li><li>DRV8833</li><li>Embedded C</li><li>Ultrasonics</li><li>Fleet Robotics</li>
+              <li>ESP32</li><li>DRV8833</li><li>Embedded C</li><li>Ultrasonics</li><li>Fleet robotics</li>
             </ul>
-            <a class="read-more" href="projects/maze-robot.html">Read more →</a>
+            <a class="read-more" href="projects/maze-robot.html">Read more</a>
           </div>
         </article>
 
@@ -364,18 +429,18 @@
           <div class="card-body">
             <div class="card-top">
               <h3>EMG-Operated Claw</h3>
-              <span class="badge badge-wip">Work in progress</span>
+              <span class="status is-live">In progress</span>
             </div>
             <p>
-              A step toward a cost-effective, open-source prosthetic. An analog EMG sensor
-              captures muscle activation; an ESP32 processes the analog signal and drives a
-              servo so a 3D-printed claw opens and closes with the user's hand. Currently
-              iterating on TPU claw geometries and more reliable electrode placement.
+              A step toward a cost-effective, open-source prosthetic. An analog EMG sensor captures
+              muscle activation; an ESP32 processes the signal and drives a servo so a 3D-printed claw
+              opens and closes with the user's hand. Currently iterating on TPU claw geometries and
+              more reliable electrode placement.
             </p>
             <ul class="tags">
-              <li>ESP32</li><li>EMG</li><li>Firmware</li><li>3D Printing</li><li>TPU</li>
+              <li>ESP32</li><li>EMG</li><li>Firmware</li><li>3D printing</li><li>TPU</li>
             </ul>
-            <a class="read-more" href="projects/emg-claw.html">Read more →</a>
+            <a class="read-more" href="projects/emg-claw.html">Read more</a>
           </div>
         </article>
 
@@ -386,86 +451,77 @@
           <div class="card-body">
             <div class="card-top">
               <h3>Two-Axis Motor Control</h3>
-              <span class="badge badge-done">Completed</span>
+              <span class="status">Completed</span>
             </div>
             <p>
-              Programmed and characterized a two-axis positioning machine on the STM32F401RE:
-              ADC input from a potentiometer mapped to stepper speed, polling and
-              interrupt-driven GPIO synchronization, and limit-switch logic to prevent
-              mechanical over-travel.
+              Programmed and characterized a two-axis positioning machine on the STM32F401RE: ADC
+              input from a potentiometer mapped to stepper speed, polling and interrupt-driven GPIO
+              synchronization, and limit-switch logic to prevent mechanical over-travel.
             </p>
             <ul class="tags">
-              <li>STM32</li><li>Embedded C</li><li>ADC / UART / GPIO</li><li>Stepper Motors</li>
+              <li>STM32</li><li>Embedded C</li><li>ADC / UART / GPIO</li><li>Stepper motors</li>
             </ul>
-            <a class="read-more" href="projects/two-axis.html">Read more →</a>
+            <a class="read-more" href="projects/two-axis.html">Read more</a>
           </div>
         </article>
 
-        <article class="card">
+        <article class="card card-wide">
           <div class="card-media card-collage card-collage-2">
             <img src="assets/img/wind-tunnel-1.jpg" alt="Lego Lightning McQueen inside the desktop wind tunnel with visible mist flow" loading="lazy">
             <img src="assets/img/wind-tunnel-2.jpg" alt="CFD simulation of airflow over the scanned car model" loading="lazy">
           </div>
           <div class="card-body">
             <div class="card-top">
-              <h3>Desktop Wind Tunnel + CFD</h3>
-              <span class="badge badge-wip">Iterating</span>
+              <h3>Desktop Wind Tunnel and CFD</h3>
+              <span class="status is-live">Iterating</span>
             </div>
             <p>
-              A low-cost 3D-printed wind tunnel for aerodynamic flow visualization — hexagonal
-              flow straightener, piezoelectric mist generator as a smoke alternative, and a
-              Lego Lightning McQueen as the test subject, with CFD simulations to compare
-              against. Next: a stronger dedicated fan, diffused lighting, and a wind-speed display.
+              A low-cost 3D-printed wind tunnel for aerodynamic flow visualization: a hexagonal flow
+              straightener, a piezoelectric mist generator as a smoke alternative, and a Lego Lightning
+              McQueen as the test subject, with CFD simulations to compare against. Next: a stronger
+              dedicated fan, diffused lighting and a wind-speed display.
             </p>
             <ul class="tags">
-              <li>CFD</li><li>3D Printing</li><li>Flow Visualization</li><li>CAD</li>
+              <li>CFD</li><li>3D printing</li><li>Flow visualization</li><li>CAD</li>
             </ul>
-            <a class="read-more" href="projects/wind-tunnel.html">Read more →</a>
+            <a class="read-more" href="projects/wind-tunnel.html">Read more</a>
           </div>
         </article>
 
-        <article class="card">
-          <!-- TODO: swap placeholder for a Growbot build photo -->
-          <div class="card-media card-media-placeholder" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="9" rx="2"/><circle cx="9.5" cy="14.5" r="1"/><circle cx="14.5" cy="14.5" r="1"/><path d="M12 10V7"/><path d="M12 7c0-2 1.5-3.5 3.5-3.5C15.5 5.5 14 7 12 7zm0 0c0-2-1.5-3.5-3.5-3.5C8.5 5.5 10 7 12 7z"/></svg>
-          </div>
+        <article class="card is-text">
           <div class="card-body">
             <div class="card-top">
-              <h3>Growbot — LLM-Embodied Robot</h3>
-              <span class="badge badge-wip">Work in progress</span>
+              <h3>Growbot: LLM-Embodied Robot</h3>
+              <span class="status is-live">In progress</span>
             </div>
             <p>
-              An LLM-driven desk robot, inspired by the video
-              <em>"I gave ChatGPT a body"</em>. It started as an IDEAS Clinic workshop
-              concept that got scrapped for time — I kept building it as a personal
-              project instead. Next step: wire it to the WHOOP API so it becomes a
-              genuinely toxic personal trainer that judges my sleep score every morning.
+              An LLM-driven desk robot, inspired by the video <q>I gave ChatGPT a body</q>. It started
+              as an IDEAS Clinic workshop concept that got scrapped for time, so I kept building it as a
+              personal project. Next step: wire it to the WHOOP API so it becomes a genuinely toxic
+              personal trainer that judges my sleep score every morning.
             </p>
             <ul class="tags">
-              <li>LLMs</li><li>Reinforcement Learning</li><li>MuJoCo</li><li>Robotics</li><li>Embedded</li>
+              <li>LLMs</li><li>Reinforcement learning</li><li>MuJoCo</li><li>Robotics</li><li>Embedded</li>
             </ul>
-            <a class="read-more" href="projects/growbot.html">Read more →</a>
+            <a class="read-more" href="projects/growbot.html">Read more</a>
           </div>
         </article>
 
-        <article class="card">
-          <div class="card-media card-media-placeholder" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="3"/><path d="M12 16v5m-4 0h8"/><path d="M5.6 6.6a9 9 0 0 1 12.8 0M8.5 9.5a5 5 0 0 1 7 0"/></svg>
-          </div>
+        <article class="card is-text">
           <div class="card-body">
             <div class="card-top">
-              <h3>Mars Rover Firmware — UW Robotics Team</h3>
-              <span class="badge badge-wip">Ethernet integration</span>
+              <h3>Mars Rover Firmware: UW Robotics Team</h3>
+              <span class="status is-live">Ethernet integration</span>
             </div>
             <p>
-              Working micro-ROS messaging over USB/USART3 on an STM32 NUCLEO-F439ZI.
-              Now testing LwIP/UDP over Ethernet and debugging Agent traffic as part of
-              the communication interface for a rover with two NVIDIA Jetsons.
+              Working micro-ROS messaging over USB/USART3 on an STM32 NUCLEO-F439ZI. Now testing
+              LwIP/UDP over Ethernet and debugging Agent traffic as part of the communication interface
+              for a rover with two NVIDIA Jetsons.
             </p>
             <ul class="tags">
               <li>STM32</li><li>micro-ROS</li><li>FreeRTOS</li><li>Ethernet / UDP</li><li>LwIP</li>
             </ul>
-            <a class="read-more" href="experience/uwrt.html">Read more →</a>
+            <a class="read-more" href="experience/uwrt.html">Read more</a>
           </div>
         </article>
 
@@ -474,10 +530,10 @@
 
     <!-- ============ CASE STUDIES ============ -->
     <section class="section container" id="case-studies">
-      <h2 class="section-title"><span class="section-num">04</span> Case Studies</h2>
+      <h2 class="section-title"><span class="section-num">04</span> Case studies</h2>
       <p class="section-lead">
-        Simulation case studies written at the IDEAS Clinic — each one pairs an analytical or
-        experimental result against a simulation, and treats the disagreement between them as the
+        Simulation case studies written at the IDEAS Clinic. Each one pairs an analytical or
+        experimental result with a simulation, and treats the disagreement between them as the
         thing worth writing about.
       </p>
       <div class="projects-grid">
@@ -489,19 +545,19 @@
           <div class="card-body">
             <div class="card-top">
               <h3>3D-Printed Compact Heat Exchanger</h3>
-              <span class="badge badge-done">Published</span>
+              <span class="status">Published by Ansys</span>
             </div>
             <p>
               A cross-flow heat exchanger printed in copper-filled PLA, measured on the bench, then
               rebuilt as a conjugate heat transfer simulation in Ansys Discovery. I characterized the
               filament's unpublished thermal properties with a thermal camera and a heated print bed,
               and traced the experiment–simulation gap to print porosity, backpressure and where the
-              thermocouple was sitting. Published by Ansys as an education resource.
+              thermocouple was sitting.
             </p>
             <ul class="tags">
-              <li>Ansys Discovery</li><li>CFD</li><li>Conjugate Heat Transfer</li><li>3D Printing</li><li>Validation</li>
+              <li>Ansys Discovery</li><li>CFD</li><li>Conjugate heat transfer</li><li>3D printing</li><li>Validation</li>
             </ul>
-            <a class="read-more" href="case-studies/heat-exchanger.html">Read more &rarr;</a>
+            <a class="read-more" href="case-studies/heat-exchanger.html">Read more</a>
           </div>
         </article>
 
@@ -511,19 +567,19 @@
           </div>
           <div class="card-body">
             <div class="card-top">
-              <h3>Involute Spur Gear Root &amp; Contact Stresses</h3>
-              <span class="badge badge-wip">Under review by Ansys</span>
+              <h3>Involute Spur Gear Root and Contact Stresses</h3>
+              <span class="status is-live">Under review by Ansys</span>
             </div>
             <p>
-              AGMA's ANSI/AGMA 2001-D04 methodology against FEA on a pair of meshing spur gears. Root
-              stress agreed to 3.11%; contact stress was 76.2% off and never converged under mesh
-              refinement — which was itself the clue. Rebuilding the contact definition in Ansys
-              Mechanical brought it to 5.13%. Currently under review by Ansys for publication.
+              AGMA's ANSI/AGMA 2001-D04 method against FEA on a pair of meshing spur gears. Root stress
+              agreed to 3.11%; contact stress was 76.2% off and never converged under mesh refinement,
+              which was itself the clue. Rebuilding the contact definition in Ansys Mechanical brought
+              it to 5.13%.
             </p>
             <ul class="tags">
-              <li>Ansys Mechanical</li><li>FEA</li><li>AGMA 2001-D04</li><li>Contact Mechanics</li><li>Convergence</li>
+              <li>Ansys Mechanical</li><li>FEA</li><li>AGMA 2001-D04</li><li>Contact mechanics</li><li>Convergence</li>
             </ul>
-            <a class="read-more" href="case-studies/spur-gear.html">Read more &rarr;</a>
+            <a class="read-more" href="case-studies/spur-gear.html">Read more</a>
           </div>
         </article>
 
@@ -533,22 +589,26 @@
     <!-- ============ EDUCATION ============ -->
     <section class="section container" id="education">
       <h2 class="section-title"><span class="section-num">05</span> Education</h2>
-      <div class="edu-card">
+      <div class="edu-row">
         <div>
           <h3>University of Waterloo</h3>
-          <p>Bachelor of Applied Science, Mechatronics Engineering (Co-op) · 2023–2028</p>
+          <p>Bachelor of Applied Science, Mechatronics Engineering (Co-op)</p>
         </div>
-        <span class="edu-badge">BASc</span>
+        <span class="spec">2023–2028</span>
       </div>
     </section>
 
     <!-- ============ CONTACT ============ -->
-    <section class="section container contact" id="contact">
+    <section class="section container" id="contact">
       <h2 class="section-title"><span class="section-num">06</span> Contact</h2>
       <p class="contact-lead">
-        I'm always happy to talk hardware, firmware, or medtech — or co-op opportunities.
+        Happy to talk hardware, firmware, robotics or medtech, and co-op opportunities.
       </p>
-      <a class="btn btn-primary" href="mailto:sffarhan@uwaterloo.ca">sffarhan@uwaterloo.ca</a>
+      <div class="contact-actions">
+        <a class="btn btn-primary" href="mailto:sffarhan@uwaterloo.ca">sffarhan@uwaterloo.ca</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/fuzail-farhan/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-ghost" href="https://github.com/fuzail127" target="_blank" rel="noopener">GitHub</a>
+      </div>
     </section>
   </main>
 

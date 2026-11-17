@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Two-Robot Arena — Syed Fuzail Farhan</title>
+  <meta name="description" content="Research with Prof. Sanjeev Bedi: two TETRIX robots with Raspberry Pi cameras find objects with YOLO, localize from ArUco markers and stay out of each other's way, from one typed request.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231c1a17'/%3E%3Ctext x='50' y='66' font-size='44' font-family='Arial, sans-serif' font-weight='bold' fill='%23faf8f4' text-anchor='middle'%3ESF%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script>
+    (function () {
+      try {
+        const saved = localStorage.getItem("theme");
+        if (saved) document.documentElement.dataset.theme = saved;
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="nav-inner container">
+      <a class="nav-brand" href="../index.html">Syed Fuzail Farhan</a>
+      <nav class="nav-links" id="nav-links">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#experience">Experience</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#case-studies">Case studies</a>
+        <a href="../index.html#contact">Contact</a>
+        <a class="nav-resume" href="../assets/resume.pdf?v=17a6b9e03f5a" target="_blank" rel="noopener">Resume</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+        </button>
+        <button class="icon-btn nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="detail">
+    <a class="back-link" href="../index.html#projects">&larr; Back to projects</a>
+    <p class="hero-kicker">Research · Prof. Sanjeev Bedi · Oct 2026 – Present · In progress</p>
+    <h1>Two-Robot Arena</h1>
+    <p class="detail-sub">
+      Two TETRIX robots, each with a Raspberry Pi and webcams, share a marked arena. One typed request,
+      like <q>bring the bottle to the near-left corner</q>, becomes a plan: find the object, send the
+      closer robot, and move the other one out of the way.
+    </p>
+    <ul class="tags">
+      <li>Raspberry Pi</li>
+      <li>TETRIX PRIZM</li>
+      <li>Arduino C++</li>
+      <li>Python</li>
+      <li>OpenCV</li>
+      <li>YOLO</li>
+      <li>ArUco</li>
+      <li>MCP</li>
+      <li>Multi-robot</li>
+    </ul>
+
+    <h2>The setup</h2>
+    <ul>
+      <li><strong>Robots:</strong> TETRIX MAX chassis on a PRIZM controller (Arduino Uno-compatible), two encoder drive motors, an ultrasonic sensor, a line sensor and a servo claw.</li>
+      <li><strong>On each robot:</strong> a Raspberry Pi with USB webcams. The PRIZM plugs into the Pi over USB.</li>
+      <li><strong>Computer:</strong> runs YOLO on the robots' camera streams and coordinates the two robots.</li>
+      <li><strong>Arena:</strong> 200 × 200 cm with eight printed ArUco markers near the corners and a virtual wall 20 cm inside the edge.</li>
+    </ul>
+
+    <h2>Where vision should run</h2>
+    <p>
+      The work started with a measurement rather than an assumption. I benchmarked object detection
+      on the Pi against sending JPEG frames to a computer over Wi-Fi and over Ethernet, first with
+      OpenCV colour detection and then with a pretrained YOLO26 nano model. Offloading to the computer
+      also let a 32-bit Pi OS use YOLO without installing PyTorch. That became the camera pipeline:
+      the Pi keeps only the newest frame from each webcam, the computer returns labels and boxes, and
+      the Pi measures how old each result is when it arrives.
+    </p>
+
+    <h2>Robots that take goals, not motor commands</h2>
+    <p>
+      Each Pi runs a robot server that accepts <strong>intents</strong> such as drive, turn, find an
+      object and approach it. Every intent is checked against a <strong>policy</strong> (speed and
+      distance limits, a clear path by ultrasonic, battery and link state) before anything moves, and
+      guards recheck obstacles, stalls and timeouts every 50 ms while it runs. Each one ends in a status
+      record: succeeded, failed, cancelled or rejected, with the reason. The server speaks the Model
+      Context Protocol (MCP), so a client like Claude Code can call it directly.
+    </p>
+    <p>Two rules run through the design:</p>
+    <ul>
+      <li><strong>The Pi decides and the PRIZM executes.</strong> The PRIZM sketch only runs validated, numbered commands, streams telemetry 20 times a second, and brakes on its own if the Pi goes quiet for 400 ms.</li>
+      <li><strong>Safety reactions happen on the robot,</strong> never over Wi-Fi. The computer handles heavy vision and planning.</li>
+    </ul>
+
+    <h2>Avoiding each other with cameras only</h2>
+    <p>
+      Each robot wears four ArUco markers, one per side. From a single marker in one frame, the other
+      robot estimates distance, bearing and how squarely it is being faced. The rule is short: if we
+      face each other, both sidestep right; otherwise, step away. In 20,000 simulated head-on meetings
+      it ended too close <strong>0.0%</strong> of the time with perfect sensing and <strong>2.4%</strong>
+      with pessimistic noise, against 10.8% and 11.1% for <q>always step away</q>. This rule has not
+      been run on the robots yet.
+    </p>
+
+    <h2>The arena</h2>
+    <p>
+      Each robot works out its position and heading from the corner markers in view, and tracks it
+      between sightings with the wheel encoders. On the computer, an arena server turns a request into
+      steps for the two robots: it picks the closer one, moves the other aside if it is in the way,
+      lets one robot drive at a time, and stops both if they come within 35 cm.
+    </p>
+
+    <h2>First run on the robots</h2>
+    <p>
+      On <strong>15 November 2026</strong>, both robots drove and turned by command, both claws were
+      calibrated, and each robot found its position from the corner markers. One complete task ran:
+      <q>fetch the bottle to the near-left corner</q> finished in <strong>57 s</strong>. Robot 1 found
+      the bottle 67 cm away, robot 2 was moved out of the carrying path first, and robot 1 picked the
+      bottle up, carried it and set it down.
+    </p>
+    <p>Still being fixed before relying on it:</p>
+    <ul>
+      <li>Robot 1 drove 55–57 cm when asked for 50 cm, so its wheel calibration needs redoing.</li>
+      <li>The cameras' focal length is not calibrated yet, so marker distances are approximate.</li>
+      <li>In that run, robot 2 could not reach the YOLO receiver on the computer, so it could not search.</li>
+    </ul>
+
+    <h2>Testing</h2>
+    <p>
+      The software for the arena phase passes 124 tests, and whole tasks run end to end against two
+      simulated robots. The PRIZM sketches also compile for the PC against stub Arduino and PRIZM
+      headers, so their command validation and watchdog can be tested without hardware. Passing tests
+      show the code agrees with its simulators; the floor, motors and network are what the run days
+      are for.
+    </p>
+    <p>
+      More about the role on the <a href="../experience/bedi-research.html">research experience page</a>.
+      Related earlier work: the <a href="fleet-robotics.html">Toyota autonomous-fleet challenge</a>.
+    </p>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>&copy; 2026 Syed Fuzail Farhan</span>
+      <div class="footer-links">
+        <a href="mailto:sffarhan@uwaterloo.ca">Email</a>
+        <a href="https://www.linkedin.com/in/fuzail-farhan/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="../assets/resume.pdf?v=17a6b9e03f5a" target="_blank" rel="noopener">Resume</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

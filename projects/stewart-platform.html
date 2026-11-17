@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stewart Platform Ball Balancer — Syed Fuzail Farhan</title>
+  <meta name="description" content="MTE 380 ball-on-plate: a three-servo Stewart platform, a camera-tracked ping-pong ball, a retuned PID loop, a waypoint planner, and an honest comparison of simulation against the real plate.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231c1a17'/%3E%3Ctext x='50' y='66' font-size='44' font-family='Arial, sans-serif' font-weight='bold' fill='%23faf8f4' text-anchor='middle'%3ESF%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script>
+    (function () {
+      try {
+        const saved = localStorage.getItem("theme");
+        if (saved) document.documentElement.dataset.theme = saved;
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="nav-inner container">
+      <a class="nav-brand" href="../index.html">Syed Fuzail Farhan</a>
+      <nav class="nav-links" id="nav-links">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#experience">Experience</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#case-studies">Case studies</a>
+        <a href="../index.html#contact">Contact</a>
+        <a class="nav-resume" href="../assets/resume.pdf?v=17a6b9e03f5a" target="_blank" rel="noopener">Resume</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+        </button>
+        <button class="icon-btn nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="detail">
+    <a class="back-link" href="../index.html#projects">&larr; Back to projects</a>
+    <p class="hero-kicker">Course project · MTE 380 · Nov 2026 · Team build</p>
+    <h1>Stewart Platform Ball Balancer</h1>
+    <p class="detail-sub">
+      A three-servo Stewart platform tilts a 300 mm plate while a camera tracks a ping-pong ball.
+      I measured the plant from our own logs, retuned the balancing loop, and wrote a waypoint
+      planner, then checked which of its gains survived on the real plate.
+    </p>
+    <ul class="tags">
+      <li>Python</li>
+      <li>OpenCV</li>
+      <li>Arduino</li>
+      <li>PID control</li>
+      <li>Trajectory planning</li>
+      <li>MATLAB</li>
+      <li>System identification</li>
+    </ul>
+
+    <h2>The system</h2>
+    <ul>
+      <li><strong>Mechanism:</strong> three servos on an Arduino Mega with a PCA9685 servo driver, tilting a 300 mm plate through inverse kinematics.</li>
+      <li><strong>Sensing:</strong> a camera above the plate finds an orange ping-pong ball by colour with OpenCV.</li>
+      <li><strong>Control:</strong> Python closes the loop on every camera frame (up to 30 Hz) and sends servo angles over serial.</li>
+    </ul>
+
+    <h2>Why the ball spiralled outward</h2>
+    <p>
+      Early runs orbited the centre and grew until the ball left the plate. Instead of guessing at
+      gains, I wrote <code>analyze_log.py</code> to fit the logs and measure the plant directly:
+      about <strong>0.2 s of dead time</strong> between a command and the ball responding (camera,
+      serial and servos together), a ball gain of 0.070 m/s² per commanded degree, and a plate about
+      1° off level at neutral. The camera axes and kinematics checked out; the gains did not. With
+      that much delay, the gains in use (about Kp 75, Ki 10, Kd 50) had a phase margin of roughly −13°,
+      so any small motion grew into an orbit.
+    </p>
+    <ul>
+      <li>Retuned to <strong>Kp 20, Ki 8, Kd 25</strong>, about 34° of phase margin on the measured plant.</li>
+      <li>Ran the controller on every frame instead of at 10.6 Hz, shortened the derivative filter, and added an integral term with real anti-windup so it could cancel the level error.</li>
+      <li>Changed the Arduino sketch to 115200 baud and tenths of a degree, since whole-degree servo steps were about 0.7° of plate tilt each.</li>
+      <li>Added level trim, a short grace period for a missed detection, and an acknowledgement from the Arduino before balancing starts.</li>
+    </ul>
+    <p>
+      After tuning on the plate, the ball held a <strong>median 7–14 mm</strong> from the centre across
+      four stretches of 13–65 s.
+    </p>
+
+    <h2>A waypoint planner</h2>
+    <p>
+      The next goal was moving the ball around a diamond of waypoints without overshooting them. The
+      planner is built on the team's model, x″ = (3/5)·g·θ for a rolling hollow ball, and a stopping
+      distance d = v² / 2a. Each move has three phases: <strong>accelerate</strong> with a timed tilt,
+      <strong>coast</strong> at a capped speed, then <strong>brake</strong> once the stopping distance
+      reaches the distance left. Braking is recalculated every frame from the measured speed, with the
+      ball's position projected one dead time ahead.
+    </p>
+
+    <figure class="figure">
+      <img src="../assets/img/stewart-planner-ideal.png" alt="Simulated ball path around a diamond: position control swings past every corner, the trajectory-planned path stops on each waypoint" loading="lazy">
+      <figcaption>Simulation, ideal model. Position control (red) overshoots every corner; the planned path (blue) stops on each one.</figcaption>
+    </figure>
+
+    <h2>Simulation against the plate</h2>
+    <p>
+      Both strategies were simulated in MATLAB with the same gains, first on the ideal model and then
+      on the plant measured from the plate (0.092 m/s² per degree, 0.23 s dead time).
+    </p>
+    <table class="results">
+      <thead>
+        <tr><th>Mean overshoot past a waypoint</th><th class="num">Position control</th><th class="num">Planned</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Ideal model</td><td class="num">10.0 mm</td><td class="num">0.0 mm</td></tr>
+        <tr><td>Measured plant</td><td class="num">33.8 mm</td><td class="num">11.3 mm</td></tr>
+        <tr><td>Measured plant, gentler braking (0.06 m/s²)</td><td class="num">33.8 mm</td><td class="num">0.0 mm</td></tr>
+      </tbody>
+    </table>
+    <p>
+      On the real plate, the run that worked reached <strong>91 waypoints in 171 s</strong> with a mean
+      overshoot of <strong>27 mm</strong>, and a simulation of the same configuration predicted
+      27 mm. That agreement supports the measured model. It does not show the planner working: the
+      planner only starts a move from rest, the ball almost never came to rest, so the accelerate and
+      brake phases ran for under 1% of that run. The diamond was traced by position feedback with
+      touch-and-go waypoints.
+    </p>
+
+    <figure class="figure">
+      <img src="../assets/img/stewart-measured-vs-sim.png" alt="Two plots side by side: the measured ball path on the platform loops widely around the diamond, the simulated path on the measured plant is smoother and stays further from the edge" loading="lazy">
+      <figcaption>Left: measured path on the platform. Right: simulation of the same configuration on the measured plant.</figcaption>
+    </figure>
+
+    <h2>Why the planner struggled on hardware</h2>
+    <ul>
+      <li><strong>A resting ball ignores small tilts.</strong> In the logs, a stationary ball almost never started rolling within 0.5 s below about 2° of net tilt. We put it down to the ball's uneven mass; servo backlash was not ruled out.</li>
+      <li><strong>Dead time.</strong> At 0.08 m/s the ball travels 18 mm before a command takes effect, comparable to the 27 mm planned braking distance.</li>
+      <li><strong>The plate is not level,</strong> and the error changed between sessions, up to about 2°. One degree is 0.09 m/s², close to the whole planned braking deceleration.</li>
+    </ul>
+
+    <h2>Still open</h2>
+    <p>
+      There is no hardware log of the two strategies under the same conditions yet. The next
+      experiment is two short runs that require the ball to rest at each waypoint, one with the planner
+      and one with position control, so the comparison on the plate matches the one in simulation.
+    </p>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>&copy; 2026 Syed Fuzail Farhan</span>
+      <div class="footer-links">
+        <a href="mailto:sffarhan@uwaterloo.ca">Email</a>
+        <a href="https://www.linkedin.com/in/fuzail-farhan/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="../assets/resume.pdf?v=17a6b9e03f5a" target="_blank" rel="noopener">Resume</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

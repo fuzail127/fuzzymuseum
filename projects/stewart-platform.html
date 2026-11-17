@@ -135,18 +135,43 @@
       <figcaption>Left: measured path on the platform. Right: simulation of the same configuration on the measured plant.</figcaption>
     </figure>
 
-    <h2>Why the planner struggled on hardware</h2>
+    <h2>Why the first planner runs struggled</h2>
     <ul>
       <li><strong>A resting ball ignores small tilts.</strong> In the logs, a stationary ball almost never started rolling within 0.5 s below about 2° of net tilt. We put it down to the ball's uneven mass; servo backlash was not ruled out.</li>
       <li><strong>Dead time.</strong> At 0.08 m/s the ball travels 18 mm before a command takes effect, comparable to the 27 mm planned braking distance.</li>
       <li><strong>The plate is not level,</strong> and the error changed between sessions, up to about 2°. One degree is 0.09 m/s², close to the whole planned braking deceleration.</li>
     </ul>
 
+    <h2>Planner against PID on the plate, same gains</h2>
+    <p>
+      On <strong>17 November</strong> we ran both strategies around the diamond with the same gains
+      (Kp 28.5, Ki 2.5, Kd 24.5): one run with plain PID stepping between waypoints, one with the
+      planner. This time the planner's accelerate, coast and brake phases ran about 10% of the time,
+      against well under 1% in the 12 November run.
+    </p>
+    <table class="results">
+      <thead>
+        <tr><th>Measured on the plate</th><th class="num">PID</th><th class="num">Planner</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Mean overshoot past a waypoint</td><td class="num">18.0 mm</td><td class="num">5.9 mm</td></tr>
+        <tr><td>Worst overshoot</td><td class="num">40.0 mm</td><td class="num">24.9 mm</td></tr>
+        <tr><td>Median distance from the diamond</td><td class="num">24.8 mm</td><td class="num">19.4 mm</td></tr>
+        <tr><td>Furthest from the centre (edge at 150 mm)</td><td class="num">124 mm</td><td class="num">100 mm</td></tr>
+        <tr><td>Waypoint moves in the run</td><td class="num">18</td><td class="num">9</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Overshoot is measured the same way as in the report: the furthest the ball travels past a
+      waypoint along its direction of approach. The planner run is short, 36 s and nine moves against
+      the PID run's 128 s and eighteen, so this is one encouraging result rather than a settled one.
+      The ball path drawn at the top of the <a href="../index.html">home page</a> is this planner run.
+    </p>
+
     <h2>Still open</h2>
     <p>
-      There is no hardware log of the two strategies under the same conditions yet. The next
-      experiment is two short runs that require the ball to rest at each waypoint, one with the planner
-      and one with position control, so the comparison on the plate matches the one in simulation.
+      A planner run as long as the PID run, to check the result holds over more waypoint moves, and
+      the same comparison with the ball required to rest at each waypoint, to match the simulation.
     </p>
   </main>
 

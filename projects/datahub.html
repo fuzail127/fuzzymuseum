@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UW DataHub — Sensor Data Backend — Syed Fuzail Farhan</title>
+  <title>UW DataHub: Sensor Data Backend — Syed Fuzail Farhan</title>
   <meta name="description" content="Backend for datahub.uwaterloo.ca — building an API for campus environmental sensors that don't have one, so a PhD researcher's data is finally in one place.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231c1a17'/%3E%3Ctext x='50' y='68' font-size='48' font-family='Arial, sans-serif' font-weight='bold' fill='white' text-anchor='middle'%3ESF%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/style.css?v=444dd54df4">
   <script>
     (function () {
       try {
@@ -47,7 +47,7 @@
   <main class="detail">
     <a class="back-link" href="../index.html#projects">&larr; Back to projects</a>
     <p class="hero-kicker">Project · IDEAS Clinic · Live</p>
-    <h1>UW DataHub — Sensor Data Backend</h1>
+    <h1>UW DataHub: Sensor Data Backend</h1>
     <p class="detail-sub">A PhD researcher had environmental sensors scattered across campus and no single place to get the data out of them. Another co-op and I rebuilt the whole platform — I took the backend.</p>
     <ul class="tags">
       <li>Python</li>
@@ -83,7 +83,7 @@
     </p>
     <ul>
       <li><strong>Existing APIs</strong> — where a real API existed, poll it, normalize the response, and fold it into the shared schema.</li>
-      <li><strong>URL manipulation</strong> — some portals generate data exports through predictable query strings, so the export endpoint <em>is</em> the API once you work out the parameters.</li>
+      <li><strong>URL manipulation</strong> — some portals generate data exports through predictable query strings, so the export endpoint is the API once you work out the parameters.</li>
       <li><strong>Request-level scraping</strong> — rather than driving a browser, I traced the requests a portal's own front end makes and replayed them directly. Faster, far less brittle, and it survives a redesign of the page.</li>
       <li><strong>Email-only sensors</strong> — automated parsing of the scheduled emails these sensors send, so their readings land in the same pipeline as everything else with no human in the loop.</li>
     </ul>
@@ -121,6 +121,6 @@
     </div>
   </footer>
 
-  <script src="../js/main.js"></script>
+  <script src="../js/main.js?v=9c2c44c23b"></script>
 </body>
 </html>

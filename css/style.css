@@ -545,6 +545,15 @@ strong { font-weight: 600; color: var(--text); }
 }
 .arena-map text.hit { fill: var(--accent-ink); }
 
+/* the same plan as a figure on the project page */
+.arena-panel {
+  background: var(--raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-control);
+  padding: 32px 24px;
+}
+.arena-panel svg { max-width: 420px; }
+
 /* ---------- Education ---------- */
 .edu-row {
   display: flex;

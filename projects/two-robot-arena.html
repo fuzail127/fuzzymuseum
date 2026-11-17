@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/style.css?v=444dd54df4">
   <script>
     (function () {
       try {
@@ -116,6 +116,38 @@
       lets one robot drive at a time, and stops both if they come within 35 cm.
     </p>
 
+    <figure class="figure">
+      <div class="arena-map arena-panel">
+        <svg viewBox="-12 -12 224 236" role="img" aria-label="Plan of the 200 by 200 cm arena: eight markers near the corners, a dashed virtual wall 20 cm inside, and five named places, with the near-left corner marked where the bottle was delivered">
+              <rect class="wall" x="0" y="0" width="200" height="200"/>
+              <rect class="keepout" x="20" y="20" width="160" height="160"/>
+              <!-- eight ArUco markers, centres 10 cm from each corner -->
+              <rect class="marker" x="2.5" y="196" width="15" height="4"/>
+              <rect class="marker" x="0" y="182.5" width="4" height="15"/>
+              <rect class="marker" x="182.5" y="196" width="15" height="4"/>
+              <rect class="marker" x="196" y="182.5" width="4" height="15"/>
+              <rect class="marker" x="2.5" y="0" width="15" height="4"/>
+              <rect class="marker" x="0" y="2.5" width="4" height="15"/>
+              <rect class="marker" x="182.5" y="0" width="15" height="4"/>
+              <rect class="marker" x="196" y="2.5" width="4" height="15"/>
+              <!-- places, 40 cm in from the walls -->
+              <path class="place" d="M156 160h8M160 156v8"/>
+              <path class="place" d="M36 40h8M40 36v8"/>
+              <path class="place" d="M156 40h8M160 36v8"/>
+              <path class="place" d="M96 100h8M100 96v8"/>
+              <circle class="place-ring" cx="40" cy="160" r="8"/>
+              <path class="place-hit" d="M36 160h8M40 156v8"/>
+              <text x="52" y="163" class="hit">near_left</text>
+              <text x="152" y="163" text-anchor="end">near_right</text>
+              <text x="48" y="43">far_left</text>
+              <text x="152" y="43" text-anchor="end">far_right</text>
+              <text x="108" y="103">centre</text>
+              <text x="78" y="214">200 × 200 cm</text>
+            </svg>
+      </div>
+      <figcaption>Arena plan from the robots' arena.json: eight corner markers, the virtual wall 20 cm in, and the named places. Amber marks near_left, where the bottle was delivered on 15 Nov.</figcaption>
+    </figure>
+
     <h2>First run on the robots</h2>
     <p>
       On <strong>15 November 2026</strong>, both robots drove and turned by command, both claws were
@@ -156,6 +188,6 @@
     </div>
   </footer>
 
-  <script src="../js/main.js"></script>
+  <script src="../js/main.js?v=9c2c44c23b"></script>
 </body>
 </html>
